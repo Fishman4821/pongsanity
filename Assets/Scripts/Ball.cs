@@ -11,6 +11,7 @@ public class Ball : MonoBehaviour
     //public Double parentDouble = null;
     //public List<Double> extraDoubles = null;
     public bool doubleScore = false;
+    public ScoreController score;
     private Rigidbody2D rb;
     private TrailRenderer tr;
     private SpriteRenderer sr;
@@ -129,15 +130,14 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Goal"))
         {
-            // if (parentDouble != null)
-            // {
-            //     parentDouble.ResetUlt();
-            //     Destroy(gameObject);
-            // }
-            // else
-            // {
-            //     Restart();
-            // }
+            if (collision.gameObject.transform.position.x < 0)
+            {
+                score.IncrementOpponentScore(doubleScore);
+            }
+            else
+            {
+                score.IncrementPlayerScore(doubleScore);
+            }
             Restart();
             return;
         }
