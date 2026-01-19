@@ -33,7 +33,8 @@ public class Opponent : MonoBehaviour
                 t.ball = GameObject.FindGameObjectWithTag("Ball");
                 break;
             case PaddleType.Launcher:
-                gameObject.AddComponent<Launcher>();
+                OpponentLauncher l = gameObject.AddComponent<OpponentLauncher>();
+                l.Opponent = true;
                 break;
         }
     }

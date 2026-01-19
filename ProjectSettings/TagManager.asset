@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ball
   - Goal
+  - Launcher
   layers:
   - Default
   - TransparentFX
@@ -42,6 +43,9 @@ TagManager:
   m_SortingLayers:
   - name: Background
     uniqueID: 3870462571
+    locked: 0
+  - name: Trail
+    uniqueID: 1022710075
     locked: 0
   - name: Default
     uniqueID: 0
