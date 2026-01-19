@@ -81,29 +81,21 @@ public class Double : Base
         bottomObj.transform.position = new Vector3(bottomObj.transform.position.x, -topObj.transform.position.y, 0);
 
         UpdateUlt();
-    }
-    void UpdateUlt()
-    {   
-        if (!UltActive && UltMeter < UltMeterMax)
+        if (ball.GetComponent<Ball>().doubleScore == false && UltActive)
         {
-            UltMeter += Time.deltaTime * 0.5f;
-        }
-
-        if (UltMeter >= UltMeterMax && !UltActive && Input.GetKeyDown(KeyCode.Space))
-        {
-            Ult();
+            ResetUlt();
         }
     }
 
-    public void ResetUlt()
+    public override void ResetUlt()
     {
         UltActive = false;
-        UltTimer = 0f;
     }
 
     public override void Ult()
     {
+        UltMeter = 0f;
         UltActive = true;
-        // ball.GetComponent<Ball>().SpawnExtra(this);
+        ball.GetComponent<Ball>().DoubleScore();
     }
 }

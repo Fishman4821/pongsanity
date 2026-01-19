@@ -360,7 +360,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3013718ee8d34cf4887cf8e736477fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerType: 1
+  playerType: 0
 --- !u!4 &640266177
 Transform:
   m_ObjectHideFlags: 0
@@ -620,6 +620,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   opponentType: 0
+--- !u!1 &1459979829
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1459979831}
+  - component: {fileID: 1459979830}
+  m_Layer: 0
+  m_Name: MiddleLine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1459979830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459979829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 257acb0bad2305144b70581459eff26a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashes: 20
+  dashLength: 0.2
+  dashWidth: 0.1
+  gapLength: 0.2
+  yOffset: -4.2
+  dashColor: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
+--- !u!4 &1459979831
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459979829}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1655797026
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,8 +884,7 @@ MonoBehaviour:
   impulse: 7.5
   drag: 0.01
   boost: 0.001
-  parentDouble: {fileID: 0}
-  extraDoubles: []
+  doubleScore: 0
 --- !u!61 &1752277228
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1090,7 +1139,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1112,6 +1161,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 1655797028}
+  - {fileID: 1459979831}
   - {fileID: 56716788}
   - {fileID: 1752277226}
   - {fileID: 1755732667}

@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.UI;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
@@ -10,10 +8,12 @@ public class Ball : MonoBehaviour
     public float impulse = 10f;
     public float drag = 0.005f;
     public float boost = 0.001f;
-    public Double parentDouble = null;
-    public List<Double> extraDoubles = null;
+    //public Double parentDouble = null;
+    //public List<Double> extraDoubles = null;
+    public bool doubleScore = false;
     private Rigidbody2D rb;
     private TrailRenderer tr;
+    private SpriteRenderer sr;
     private bool serveDirection = true; // false = right, true = left
     IEnumerator Serve()
     {
@@ -30,6 +30,8 @@ public class Ball : MonoBehaviour
 
     void Reset()
     {
+        doubleScore = false;
+        sr.color = Color.white;
         tr.emitting = false;
         rb.velocity = Vector2.zero;
         transform.position = Vector2.zero;
@@ -55,7 +57,8 @@ public class Ball : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         tr = GetComponent<TrailRenderer>();
-        extraDoubles = new List<Double>();
+        sr = GetComponent<SpriteRenderer>();
+        //extraDoubles = new List<Double>();
         StartCoroutine(Serve());
     }
 
@@ -96,21 +99,6 @@ public class Ball : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Goal"))
-        {
-            // if (parentDouble != null)
-            // {
-            //     parentDouble.ResetUlt();
-            //     Destroy(gameObject);
-            // }
-            // else
-            // {
-            //     Restart();
-            // }
-            Restart();
-            return;
-        }
-
         //if (!collision.gameObject.CompareTag("Ball"))
         if (!collision.gameObject.CompareTag("Wall") && !collision.gameObject.CompareTag("Bottom Double"))
         {
@@ -129,6 +117,7 @@ public class Ball : MonoBehaviour
 
         if (collision.gameObject.TryGetComponent<Base>(out var obj))
         {
+            obj.UltMeter += 0.1f;
             if (obj is Three three && three.UltActive)
             {
                 rb.velocity = impulse * three.ultBallMult * rb.velocity.normalized;
@@ -138,12 +127,37 @@ public class Ball : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Launcher"))
+        if (collision.gameObject.CompareTag("Goal"))
+        {
+            // if (parentDouble != null)
+            // {
+            //     parentDouble.ResetUlt();
+            //     Destroy(gameObject);
+            // }
+            // else
+            // {
+            //     Restart();
+            // }
+            Restart();
+            return;
+        }
+        else if (collision.gameObject.CompareTag("Launcher"))
         {
             collision.gameObject.GetComponent<Launcher>().holdingBall = true;
             rb.velocity = Vector2.zero;
             transform.position = collision.gameObject.transform.position;
         }
+    }
+
+    public void PaddleUlt(float mult)
+    {
+        rb.velocity = impulse * mult * -rb.velocity.normalized;
+    }
+
+    public void DoubleScore()
+    {
+        doubleScore = true;
+        sr.color = Color.green;
     }
 
     // public void SpawnExtra(Double parent)

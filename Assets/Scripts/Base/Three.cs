@@ -63,29 +63,7 @@ public class Three : Base
         UpdateUlt();
     }
 
-    void UpdateUlt()
-    {
-        if (UltActive)
-        {
-            UltTimer += Time.deltaTime;
-            if (UltTimer >= UltDuration)
-            {
-                ResetUlt();
-            }
-        }
-        
-        if (!UltActive && UltMeter < UltMeterMax)
-        {
-            UltMeter += Time.deltaTime * 0.5f;
-        }
-
-        if (UltMeter >= UltMeterMax && !UltActive && Input.GetKeyDown(KeyCode.Space))
-        {
-            Ult();
-        }
-    }
-
-    void ResetUlt()
+    public override void ResetUlt()
     {
         UltActive = false;
         UltTimer = 0f;
