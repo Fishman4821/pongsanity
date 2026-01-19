@@ -4,42 +4,42 @@ using UnityEngine;
 
 public class Opponent : MonoBehaviour
 {
-    public float speed = 10f;
-    public float boundY = 2.25f;
-    protected Rigidbody2D rb;
-    public GameObject ball;
+    public enum PaddleType
+    {
+        Paddle,
+        Double,
+        Three,
+        Launcher
+    }
+    public PaddleType opponentType;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        switch (opponentType)
+        {
+            case PaddleType.Paddle:
+                OpponentPaddle p = gameObject.AddComponent<OpponentPaddle>();
+                p.Opponent = true;
+                p.ball = GameObject.FindGameObjectWithTag("Ball");
+                break;
+            case PaddleType.Double:
+                OpponentDouble d = gameObject.AddComponent<OpponentDouble>();
+                d.Opponent = true;
+                d.ball = GameObject.FindGameObjectWithTag("Ball");
+                break;
+            case PaddleType.Three:
+                OpponentThree t = gameObject.AddComponent<OpponentThree>();
+                t.Opponent = true;
+                t.ball = GameObject.FindGameObjectWithTag("Ball");
+                break;
+            case PaddleType.Launcher:
+                gameObject.AddComponent<Launcher>();
+                break;
+        }
     }
 
     void Update()
     {
-        Vector2 velocity = rb.velocity;
-        if (ball.transform.position.y > transform.position.y + 0.1f)
-        {
-            velocity.y = speed;
-        }
-        else if (ball.transform.position.y < transform.position.y - 0.1f)
-        {
-            velocity.y = -speed;
-        }
-        else
-        {
-            velocity.y = 0;
-        }
-        rb.velocity = velocity;
-
-        Vector3 pos = transform.position;
-        if (pos.y > boundY)
-        {
-            pos.y = boundY;
-        }
-        else if (pos.y < -boundY)
-        {
-            pos.y = -boundY;
-        }
-        transform.position = pos;
+        
     }
 }

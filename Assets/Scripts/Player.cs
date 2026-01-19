@@ -5,43 +5,40 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public KeyCode upKey = KeyCode.W;
-    public KeyCode downKey = KeyCode.S;
-    public float speed = 10f;
-    public float boundY = 2.25f;
-    protected Rigidbody2D rb;
+    public enum PaddleType
+    {
+        Paddle,
+        Double,
+        Three,
+        Launcher
+    }
+    public PaddleType playerType;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        switch (playerType)
+        {
+            case PaddleType.Paddle:
+                Paddle p = gameObject.AddComponent<Paddle>();
+                p.Opponent = false;
+                break;
+            case PaddleType.Double:
+                Double d = gameObject.AddComponent<Double>();
+                d.Opponent = false;
+                break;
+            case PaddleType.Three:
+                Three t = gameObject.AddComponent<Three>();
+                t.Opponent = false;
+                break;
+            case PaddleType.Launcher:
+                Launcher l = gameObject.AddComponent<Launcher>();
+                l.Opponent = false;
+                break;
+        }
     }
 
     void Update()
     {
-        Vector2 velocity = rb.velocity;
-        if (Input.GetKey(upKey))
-        {
-            velocity.y = speed;
-        }
-        else if (Input.GetKey(downKey))
-        {
-            velocity.y = -speed;
-        }
-        else
-        {
-            velocity.y = 0;
-        }
-        rb.velocity = velocity;
-
-        Vector3 pos = transform.position;
-        if (pos.y > boundY)
-        {
-            pos.y = boundY;
-        }
-        else if (pos.y < -boundY)
-        {
-            pos.y = -boundY;
-        }
-        transform.position = pos;
+        
     }
 }
