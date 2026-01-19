@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &56716787
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 601204907}
   m_Layer: 0
   m_Name: Bottom
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3013718ee8d34cf4887cf8e736477fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerType: 3
+  playerType: 1
 --- !u!4 &640266177
 Transform:
   m_ObjectHideFlags: 0
@@ -510,7 +510,7 @@ GameObject:
   - component: {fileID: 693749697}
   m_Layer: 0
   m_Name: Top
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -831,9 +831,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd1da1856adf2b4abd0daf5d2fb3d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impulse: 5
+  impulse: 7.5
   drag: 0.01
   boost: 0.001
+  parentDouble: {fileID: 0}
+  extraDoubles: []
 --- !u!61 &1752277228
 BoxCollider2D:
   m_ObjectHideFlags: 0

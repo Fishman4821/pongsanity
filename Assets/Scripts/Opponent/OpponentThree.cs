@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class OpponentThree : Three
 {
-    public GameObject ball;
+    protected override bool Opponent { get; set; } = true;
 
     void Update()
     {

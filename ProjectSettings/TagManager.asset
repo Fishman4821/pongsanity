@@ -7,6 +7,8 @@ TagManager:
   - Ball
   - Goal
   - Launcher
+  - Wall
+  - Bottom Double
   layers:
   - Default
   - TransparentFX

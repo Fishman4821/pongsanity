@@ -3,21 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Launcher : MonoBehaviour
+public class Launcher : Base
 {
-    public bool Opponent;
     public float speed = 5f;
     public float turnSpeed = 400f;
     public float boundY = 2.625f;
+    public float ultForceMult = 2f;
+    public override float UltDuration { get; set; } = 5.0f;
+    public bool holdingBall = false;
     protected SpriteRenderer sr;
     protected BoxCollider2D bc;
     protected Rigidbody2D rb;
-    protected GameObject ball;
-    public bool holdingBall = false;
+    protected GameObject[] parts;
 
     void InitShape()
     {
-        GameObject[] parts = new GameObject[5];
+        parts = new GameObject[5];
         Sprite sprite = Resources.Load<Sprite>("Square");
         for (int i = 0; i < 5; i++)
         {
@@ -28,15 +29,13 @@ public class Launcher : MonoBehaviour
         parts[0].transform.localPosition = new Vector3(0.125f + 0.125f / 4f - 0.01f - 0.25f, 0.75f / 2f - 0.125f / 4f, 1);
         parts[0].transform.localScale = new Vector3(0.75f / 2f, 0.125f / 2f, 1);
 
-        parts[1].transform.localPosition = new Vector3(-0.125f / 2f - 0.25f, 0.75f / 2f - 0.125f / 2f - 0.005f, 1);
-        parts[1].transform.localRotation = Quaternion.Euler(0, 0, -45);
+        parts[1].transform.SetLocalPositionAndRotation(new Vector3(-0.125f / 2f - 0.25f, 0.75f / 2f - 0.125f / 2f - 0.005f, 1), Quaternion.Euler(0, 0, -45));
         parts[1].transform.localScale = new Vector3(0.125f / 2f, 0.125f, 1);
 
         parts[2].transform.localPosition = new Vector3(-0.75f / 4f + 0.125f / 2f + 0.125f / 4f - 0.25f, 0, 1);
         parts[2].transform.localScale = new Vector3(0.125f / 2f, 0.5f + 0.125f / 2f, 1);
 
-        parts[3].transform.localPosition = new Vector3(-0.125f / 2f - 0.25f, -0.75f / 2f + 0.125f / 2f + 0.005f, 1);
-        parts[3].transform.localRotation = Quaternion.Euler(0, 0, 45);
+        parts[3].transform.SetLocalPositionAndRotation(new Vector3(-0.125f / 2f - 0.25f, -0.75f / 2f + 0.125f / 2f + 0.005f, 1), Quaternion.Euler(0, 0, 45));
         parts[3].transform.localScale = new Vector3(0.125f / 2f, 0.125f, 1);
 
         parts[4].transform.localPosition = new Vector3(0.125f + 0.125f / 4f - 0.01f - 0.25f, -0.75f / 2f + 0.125f / 4f, 1);
@@ -143,8 +142,56 @@ public class Launcher : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.W) && holdingBall)
         {
-            ball.GetComponent<Rigidbody2D>().velocity = 15f * new Vector2(Mathf.Cos(transform.rotation.eulerAngles.z * Mathf.Deg2Rad), Mathf.Sin(transform.rotation.eulerAngles.z * Mathf.Deg2Rad));
+            ball.GetComponent<Rigidbody2D>().velocity = (UltActive ? ultForceMult : 1f) * ball.GetComponent<Ball>().impulse * new Vector2(Mathf.Cos(transform.rotation.eulerAngles.z * Mathf.Deg2Rad), Mathf.Sin(transform.rotation.eulerAngles.z * Mathf.Deg2Rad));
             holdingBall = false;
+            if (UltActive)
+            {
+                ResetUlt();
+            }
+        }
+
+        UpdateUlt();
+    }
+
+    void UpdateUlt()
+    {
+        if (UltActive)
+        {
+            UltTimer += Time.deltaTime;
+            if (UltTimer >= UltDuration)
+            {
+                ResetUlt();
+            }
+        }
+        
+        if (!UltActive && UltMeter < UltMeterMax)
+        {
+            UltMeter += Time.deltaTime * 0.5f;
+        }
+
+        if (UltMeter >= UltMeterMax && !UltActive && Input.GetKeyDown(KeyCode.Space))
+        {
+            Ult();
+        }
+    }
+
+    void ResetUlt()
+    {
+        UltActive = false;
+        UltTimer = 0f;
+        for (int i = 0; i < parts.Length; i++)
+        {
+            parts[i].GetComponent<SpriteRenderer>().color = Color.white;
+        }
+    }
+
+    public override void Ult()
+    {
+        UltMeter = 0f;
+        UltActive = true;
+        for (int i = 0; i < parts.Length; i++)
+        {
+            parts[i].GetComponent<SpriteRenderer>().color = Color.red;
         }
     }
 }

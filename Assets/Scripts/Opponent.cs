@@ -19,28 +19,16 @@ public class Opponent : MonoBehaviour
         {
             case PaddleType.Paddle:
                 OpponentPaddle p = gameObject.AddComponent<OpponentPaddle>();
-                p.Opponent = true;
-                p.ball = GameObject.FindGameObjectWithTag("Ball");
                 break;
             case PaddleType.Double:
                 OpponentDouble d = gameObject.AddComponent<OpponentDouble>();
-                d.Opponent = true;
-                d.ball = GameObject.FindGameObjectWithTag("Ball");
                 break;
             case PaddleType.Three:
                 OpponentThree t = gameObject.AddComponent<OpponentThree>();
-                t.Opponent = true;
-                t.ball = GameObject.FindGameObjectWithTag("Ball");
                 break;
             case PaddleType.Launcher:
                 OpponentLauncher l = gameObject.AddComponent<OpponentLauncher>();
-                l.Opponent = true;
                 break;
         }
-    }
-
-    void Update()
-    {
-        
     }
 }

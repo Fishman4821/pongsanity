@@ -20,25 +20,16 @@ public class Player : MonoBehaviour
         {
             case PaddleType.Paddle:
                 Paddle p = gameObject.AddComponent<Paddle>();
-                p.Opponent = false;
                 break;
             case PaddleType.Double:
                 Double d = gameObject.AddComponent<Double>();
-                d.Opponent = false;
                 break;
             case PaddleType.Three:
                 Three t = gameObject.AddComponent<Three>();
-                t.Opponent = false;
                 break;
             case PaddleType.Launcher:
                 Launcher l = gameObject.AddComponent<Launcher>();
-                l.Opponent = false;
                 break;
         }
-    }
-
-    void Update()
-    {
-        
     }
 }

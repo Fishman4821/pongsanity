@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class OpponentLauncher : Launcher
 {
+    protected override bool Opponent { get; set; } = true;
+
     void Update()
     {
         

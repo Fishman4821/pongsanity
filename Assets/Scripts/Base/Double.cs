@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Double : MonoBehaviour
+public class Double : Base
 {
-    public bool Opponent;
-    public float speed = 10f;
+    public float speed = 6f;
     public float boundY = 2.5f;
-
+    public override float UltDuration { get; set; } = 0f;
     protected GameObject topObj;
     protected SpriteRenderer topSr;
     protected Rigidbody2D topRb;
@@ -46,6 +45,9 @@ public class Double : MonoBehaviour
         topRb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
         topRb.bodyType = RigidbodyType2D.Kinematic;
         topRb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        BottomDouble bottom = bottomObj.AddComponent<BottomDouble>();
+        bottom.topRb = topRb;
+        bottomObj.tag = "Bottom Double";
     }
 
     void Update()
@@ -77,5 +79,31 @@ public class Double : MonoBehaviour
         topObj.transform.position = pos;
 
         bottomObj.transform.position = new Vector3(bottomObj.transform.position.x, -topObj.transform.position.y, 0);
+
+        UpdateUlt();
+    }
+    void UpdateUlt()
+    {   
+        if (!UltActive && UltMeter < UltMeterMax)
+        {
+            UltMeter += Time.deltaTime * 0.5f;
+        }
+
+        if (UltMeter >= UltMeterMax && !UltActive && Input.GetKeyDown(KeyCode.Space))
+        {
+            Ult();
+        }
+    }
+
+    public void ResetUlt()
+    {
+        UltActive = false;
+        UltTimer = 0f;
+    }
+
+    public override void Ult()
+    {
+        UltActive = true;
+        // ball.GetComponent<Ball>().SpawnExtra(this);
     }
 }

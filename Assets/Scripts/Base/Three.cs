@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 
-public class Three : MonoBehaviour
+public class Three : Base
 {
-    public bool Opponent;
-    public float speed = 10f;
+    public float speed = 3.0f;
+    public float ultSpeedMult = 3.0f;
+    public float ultBallMult = 2.0f;
+    public override float UltDuration { get; set; } = 5.0f;
     protected SpriteRenderer sr;
     protected Rigidbody2D rb;
 
@@ -44,18 +46,56 @@ public class Three : MonoBehaviour
             pos = Mathf.Clamp(pos - 1, -1, 1);
         }
 
-        if (transform.position.y < pos * 2.0f - 0.01f)
+        if (transform.position.y < pos * 2.0f - 0.05f)
         {
-            rb.velocity = new Vector2(0, speed);
+            rb.velocity = new Vector2(0, speed * (UltActive ? ultSpeedMult : 1f));
         }
-        else if (transform.position.y > pos * 2.0f + 0.01f)
+        else if (transform.position.y > pos * 2.0f + 0.05f)
         {
-            rb.velocity = new Vector2(0, -speed);
+            rb.velocity = new Vector2(0, -speed * (UltActive ? ultSpeedMult : 1f));
         }
         else
         {
             rb.velocity = Vector2.zero;
             transform.position = new Vector3(transform.position.x, pos * 2.0f, 0);
         }
+
+        UpdateUlt();
+    }
+
+    void UpdateUlt()
+    {
+        if (UltActive)
+        {
+            UltTimer += Time.deltaTime;
+            if (UltTimer >= UltDuration)
+            {
+                ResetUlt();
+            }
+        }
+        
+        if (!UltActive && UltMeter < UltMeterMax)
+        {
+            UltMeter += Time.deltaTime * 0.5f;
+        }
+
+        if (UltMeter >= UltMeterMax && !UltActive && Input.GetKeyDown(KeyCode.Space))
+        {
+            Ult();
+        }
+    }
+
+    void ResetUlt()
+    {
+        UltActive = false;
+        UltTimer = 0f;
+        sr.color = Color.white;
+    }
+
+    public override void Ult()
+    {
+        UltMeter = 0f;
+        UltActive = true;
+        sr.color = Color.cyan;
     }
 }
