@@ -13,6 +13,25 @@ public abstract class Base : MonoBehaviour
     public float UltTimer = 0f;
     public bool UltActive = false;
     public abstract void Ult();
+    public abstract void ResetUlt();
+
+    protected void UpdateUlt()
+    {   
+        UltMeter = Mathf.Min(UltMeterMax, UltMeter + Time.deltaTime * 0.5f); // testing, remove later
+        if (UltActive && UltDuration != 0f)
+        {
+            UltTimer += Time.deltaTime;
+            if (UltTimer >= UltDuration)
+            {
+                ResetUlt();
+            }
+        }
+
+        if (UltMeter >= UltMeterMax && !UltActive && Input.GetKeyDown(KeyCode.Space))
+        {
+            Ult();
+        }
+    }
 
     void Awake()
     {

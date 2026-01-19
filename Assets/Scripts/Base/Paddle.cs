@@ -7,7 +7,8 @@ public class Paddle : Base
 {
     public float speed = 7.5f;
     public float boundY = 2.5f;
-    public override float UltDuration { get; set; } = 5.0f;
+    public float ultForceMult = 2f;
+    public override float UltDuration { get; set; } = 0.1f;
     protected SpriteRenderer sr;
     protected Rigidbody2D rb;
 
@@ -47,28 +48,28 @@ public class Paddle : Base
         {
             velocity.y = 0;
         }
-        if (UltActive)
-        {
-            if (Input.GetKey(KeyCode.A))
-            {
-                velocity.x = -speed;
-            }
-            else if (Input.GetKey(KeyCode.D))
-            {
-                velocity.x = speed;
-            }
-            else
-            {
-                velocity.x = 0;
-            }
-        } 
-        else
-        {
-            if (transform.position.x > -3.95f || transform.position.x < -4.05f)
-            {
-                transform.position = new Vector3(Mathf.MoveTowards(transform.position.x, Opponent ? 4f : -4f, speed * Time.deltaTime), transform.position.y, 0);
-            }
-        }
+        // if (UltActive)
+        // {
+        //     if (Input.GetKey(KeyCode.A))
+        //     {
+        //         velocity.x = -speed;
+        //     }
+        //     else if (Input.GetKey(KeyCode.D))
+        //     {
+        //         velocity.x = speed;
+        //     }
+        //     else
+        //     {
+        //         velocity.x = 0;
+        //     }
+        // } 
+        // else
+        // {
+        //     if (transform.position.x > -3.95f || transform.position.x < -4.05f)
+        //     {
+        //         transform.position = new Vector3(Mathf.MoveTowards(transform.position.x, Opponent ? 4f : -4f, speed * Time.deltaTime), transform.position.y, 0);
+        //     }
+        // }
         rb.velocity = velocity;
 
         Vector3 pos = transform.position;
@@ -107,38 +108,18 @@ public class Paddle : Base
         UpdateUlt();
     }
 
-    void UpdateUlt()
-    {
-        if (UltActive)
-        {
-            UltTimer += Time.deltaTime;
-            if (UltTimer >= UltDuration)
-            {
-                ResetUlt();
-            }
-        }
-        
-        if (!UltActive && UltMeter < UltMeterMax)
-        {
-            UltMeter += Time.deltaTime * 0.5f;
-        }
-
-        if (UltMeter >= UltMeterMax && !UltActive && Input.GetKeyDown(KeyCode.Space))
-        {
-            Ult();
-        }
-    }
-
-    public void ResetUlt()
+    public override void ResetUlt()
     {
         UltActive = false;
-        UltTimer = 0f;
-        sr.color = Color.white;
+        //sr.color = Color.white;
     }
 
     public override void Ult()
     {
+        UltMeter = 0f;
         UltActive = true;
-        sr.color = Color.yellow;
+        //sr.color = Color.yellow;
+        ball.GetComponent<Ball>().PaddleUlt(ultForceMult);
+        ResetUlt();
     }
 }
