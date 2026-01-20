@@ -8,7 +8,7 @@ public class Launcher : Base
     public float speed = 5f;
     public float turnSpeed = 400f;
     public float boundY = 2.625f;
-    public float ultForceMult = 2f;
+    public float ultForceMult = 2.5f;
     public override float UltDuration { get; set; } = 5.0f;
     public bool holdingBall = false;
     protected SpriteRenderer sr;

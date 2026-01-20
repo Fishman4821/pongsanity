@@ -36,6 +36,24 @@ public abstract class Base : MonoBehaviour
         }
     }
 
+    protected bool Waited = false;
+
+    protected IEnumerator Wait(float s)
+    {
+        yield return new WaitForSecondsRealtime(s);
+        Waited = true;
+    }
+
+    public void IncrementUltMeter()
+    {
+        UltMeter = Mathf.Clamp(UltMeter + 0.25f, 0f, UltMeterMax);
+    }
+
+    public bool UltReady()
+    {
+        return UltMeter >= UltMeterMax && !UltActive;
+    }
+
     void Start()
     {
         ball = GameObject.FindGameObjectWithTag("Ball");

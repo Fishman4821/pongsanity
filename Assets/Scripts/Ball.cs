@@ -104,7 +104,7 @@ public class Ball : MonoBehaviour
 
         if (collision.gameObject.TryGetComponent<Base>(out var obj))
         {
-            obj.UltMeter += 0.1f;
+            obj.IncrementUltMeter();
             if (obj is Three three && three.UltActive)
             {
                 rb.velocity = impulse * three.ultBallMult * rb.velocity.normalized;
@@ -129,7 +129,9 @@ public class Ball : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Launcher"))
         {
-            collision.gameObject.GetComponent<Launcher>().holdingBall = true;
+            Launcher l = collision.gameObject.GetComponent<Launcher>();
+            l.holdingBall = true;
+            l.IncrementUltMeter();
             rb.velocity = Vector2.zero;
             transform.position = collision.gameObject.transform.position;
         }
@@ -138,6 +140,7 @@ public class Ball : MonoBehaviour
     public void PaddleUlt(float mult)
     {
         rb.velocity = impulse * mult * -rb.velocity.normalized;
+        rb.velocity = new Vector2(rb.velocity.x, -rb.velocity.y);  
     }
 
     public void DoubleScore()

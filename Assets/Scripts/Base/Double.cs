@@ -50,6 +50,21 @@ public class Double : Base
         bottomObj.tag = "Bottom Double";
     }
 
+    protected void ClampYPosition()
+    {
+        Vector3 pos = topObj.transform.position;
+        if (pos.y > boundY)
+        {
+            pos.y = boundY;
+        }
+        else if (pos.y < 0.5f)
+        {
+            pos.y = 0.5f;
+        }
+        topObj.transform.position = pos;
+        bottomObj.transform.position = new Vector3(bottomObj.transform.position.x, -pos.y, bottomObj.transform.position.z);
+    }
+
     void Update()
     {
         Vector2 velocity = topRb.velocity;
@@ -67,19 +82,8 @@ public class Double : Base
         }
         topRb.velocity = velocity;
 
-        Vector3 pos = topObj.transform.position;
-        if (pos.y > boundY)
-        {
-            pos.y = boundY;
-        }
-        else if (pos.y < 0.5f)
-        {
-            pos.y = 0.5f;
-        }
-        topObj.transform.position = pos;
-
-        bottomObj.transform.position = new Vector3(bottomObj.transform.position.x, -topObj.transform.position.y, 0);
-
+        ClampYPosition();
+        
         UpdateUlt();
         if (ball.GetComponent<Ball>().doubleScore == false && UltActive)
         {

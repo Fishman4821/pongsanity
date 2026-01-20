@@ -29,6 +29,17 @@ namespace OpponentHelper
             paddleHeight = paddleHeight_;
         }
 
+        public Self(GameObject self_, Rigidbody2D rb_, GameObject ballObj_, float speed_, float paddleHeight_)
+        {
+            self = self_;
+            rb = rb_;
+            ballObj = ballObj_;
+            ball = ballObj.GetComponent<Rigidbody2D>();
+            speed = speed_;
+            mb = self.GetComponentInParent<MonoBehaviour>();
+            paddleHeight = paddleHeight_;
+        }
+
         public void MoveUp()
         {
             Vector2 velocity = rb.velocity;
