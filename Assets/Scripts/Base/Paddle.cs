@@ -48,28 +48,6 @@ public class Paddle : Base
         {
             velocity.y = 0;
         }
-        // if (UltActive)
-        // {
-        //     if (Input.GetKey(KeyCode.A))
-        //     {
-        //         velocity.x = -speed;
-        //     }
-        //     else if (Input.GetKey(KeyCode.D))
-        //     {
-        //         velocity.x = speed;
-        //     }
-        //     else
-        //     {
-        //         velocity.x = 0;
-        //     }
-        // } 
-        // else
-        // {
-        //     if (transform.position.x > -3.95f || transform.position.x < -4.05f)
-        //     {
-        //         transform.position = new Vector3(Mathf.MoveTowards(transform.position.x, Opponent ? 4f : -4f, speed * Time.deltaTime), transform.position.y, 0);
-        //     }
-        // }
         rb.velocity = velocity;
 
         Vector3 pos = transform.position;
@@ -111,14 +89,12 @@ public class Paddle : Base
     public override void ResetUlt()
     {
         UltActive = false;
-        //sr.color = Color.white;
     }
 
     public override void Ult()
     {
         UltMeter = 0f;
         UltActive = true;
-        //sr.color = Color.yellow;
         ball.GetComponent<Ball>().PaddleUlt(ultForceMult);
         ResetUlt();
     }
