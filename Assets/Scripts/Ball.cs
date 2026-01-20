@@ -39,7 +39,6 @@ public class Ball : MonoBehaviour
     void Restart()
     {
         Reset();
-        serveDirection = !serveDirection;
         StartCoroutine(Serve());
     }
 

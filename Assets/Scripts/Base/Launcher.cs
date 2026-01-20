@@ -56,7 +56,7 @@ public class Launcher : Base
         parts[4].AddComponent<BoxCollider2D>();
     }
 
-    void Start()
+    protected override void Init()
     {
         gameObject.tag = "Launcher";
         if (Opponent)

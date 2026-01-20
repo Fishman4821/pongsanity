@@ -14,7 +14,7 @@ public class Three : Base
 
     protected int pos = 0;
 
-    void Start()
+    protected override void Init()
     {
         transform.localScale = new Vector3(0.25f, 2, 1);
         if (Opponent)

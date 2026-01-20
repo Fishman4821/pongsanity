@@ -12,7 +12,7 @@ public class Paddle : Base
     protected SpriteRenderer sr;
     protected Rigidbody2D rb;
 
-    void Start()
+    protected override void Init()
     {
         transform.localScale = new Vector3(0.25f, 1, 1);
         if (Opponent)

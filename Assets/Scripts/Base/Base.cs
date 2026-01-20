@@ -15,6 +15,10 @@ public abstract class Base : MonoBehaviour
     public abstract void Ult();
     public abstract void ResetUlt();
 
+    protected abstract void Init();
+
+    protected virtual void InitOpponent() {}
+
     protected void UpdateUlt()
     {   
         if (UltActive && UltDuration != 0f)
@@ -32,8 +36,10 @@ public abstract class Base : MonoBehaviour
         }
     }
 
-    void Awake()
+    void Start()
     {
         ball = GameObject.FindGameObjectWithTag("Ball");
+        Init();
+        InitOpponent();
     }
 }

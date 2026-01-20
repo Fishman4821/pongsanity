@@ -15,7 +15,7 @@ public class Double : Base
     protected GameObject bottomObj;
     protected SpriteRenderer bottomSr;
 
-    void Start()
+    protected override void Init()
     {
         topObj = new GameObject("TopPaddle");
         bottomObj = new GameObject("BottomPaddle");
