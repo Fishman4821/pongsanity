@@ -17,7 +17,6 @@ public abstract class Base : MonoBehaviour
 
     protected void UpdateUlt()
     {   
-        UltMeter = Mathf.Min(UltMeterMax, UltMeter + Time.deltaTime * 0.5f); // testing, remove later
         if (UltActive && UltDuration != 0f)
         {
             UltTimer += Time.deltaTime;

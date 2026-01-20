@@ -8,8 +8,6 @@ public class Ball : MonoBehaviour
     public float impulse = 10f;
     public float drag = 0.005f;
     public float boost = 0.001f;
-    //public Double parentDouble = null;
-    //public List<Double> extraDoubles = null;
     public bool doubleScore = false;
     public ScoreController score;
     private Rigidbody2D rb;
@@ -42,15 +40,6 @@ public class Ball : MonoBehaviour
     {
         Reset();
         serveDirection = !serveDirection;
-        // if (extraDoubles != null && extraDoubles.Count > 0)
-        // {
-        //     List<GameObject> extras = CreateExtra();
-        //     for (int i = 0; i < extras.Count; i++)
-        //     {
-
-        //         StartCoroutine(extras[i].GetComponent<Ball>().Serve());
-        //     }
-        // }
         StartCoroutine(Serve());
     }
 
@@ -59,7 +48,6 @@ public class Ball : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         tr = GetComponent<TrailRenderer>();
         sr = GetComponent<SpriteRenderer>();
-        //extraDoubles = new List<Double>();
         StartCoroutine(Serve());
     }
 
@@ -100,7 +88,6 @@ public class Ball : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        //if (!collision.gameObject.CompareTag("Ball"))
         if (!collision.gameObject.CompareTag("Wall") && !collision.gameObject.CompareTag("Bottom Double"))
         {
             Vector2 velocity;
@@ -159,26 +146,4 @@ public class Ball : MonoBehaviour
         doubleScore = true;
         sr.color = Color.green;
     }
-
-    // public void SpawnExtra(Double parent)
-    // {
-    //     extraDoubles.Add(parent);
-    // }
-
-    // private List<GameObject> CreateExtra()
-    // {
-    //     List<GameObject> extras = new();
-    //     Debug.Log(extraDoubles.Count + " extraDoubles.Count");
-    //     for (int i = 0; i < extraDoubles.Count; i++)
-    //     {
-    //         GameObject ball = Instantiate(gameObject, new Vector3(0, i / (extraDoubles.Count + 1) * 6, 0), Quaternion.identity);
-    //         Ball ballScript = ball.GetComponent<Ball>();
-    //         ballScript.name = "Extra Ball";
-    //         ballScript.parentDouble = extraDoubles[i];
-    //         ballScript.extraDoubles.Clear();
-    //         extras.Add(ball);
-    //     }
-    //     extraDoubles.Clear();
-    //     return extras;
-    // }
 }
