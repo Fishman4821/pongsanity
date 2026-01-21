@@ -14,6 +14,9 @@ public class Ball : MonoBehaviour
     private TrailRenderer tr;
     private SpriteRenderer sr;
     private bool serveDirection = true; // false = right, true = left
+    public AudioSource audioSource;
+    public AudioClip bounceBonk;
+    public AudioClip scoreDing;
     IEnumerator Serve()
     {
         yield return new WaitForSeconds(2f);
@@ -93,6 +96,7 @@ public class Ball : MonoBehaviour
             velocity.x = rb.velocity.x;
             velocity.y = (rb.velocity.y / 2) + (collision.collider.attachedRigidbody.velocity.y / 3);
             rb.velocity = velocity;
+            audioSource.PlayOneShot(bounceBonk);
         } 
         else if (collision.gameObject.CompareTag("Bottom Double"))
         {
@@ -100,6 +104,7 @@ public class Ball : MonoBehaviour
             velocity.x = rb.velocity.x;
             velocity.y = (rb.velocity.y / 2) + (-collision.collider.gameObject.GetComponent<BottomDouble>().topRb.velocity.y / 3);
             rb.velocity = velocity;
+            audioSource.PlayOneShot(bounceBonk);
         }
 
         if (collision.gameObject.TryGetComponent<Base>(out var obj))
@@ -119,10 +124,12 @@ public class Ball : MonoBehaviour
             if (collision.gameObject.transform.position.x < 0)
             {
                 score.IncrementOpponentScore(doubleScore);
+                audioSource.PlayOneShot(scoreDing);
             }
             else
             {
                 score.IncrementPlayerScore(doubleScore);
+                audioSource.PlayOneShot(scoreDing);
             }
             Restart();
             return;
