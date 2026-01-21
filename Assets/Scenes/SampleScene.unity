@@ -1150,7 +1150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e501b9137018c4299d91ada33b306c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  opponentType: 2
+  opponentType: 3
 --- !u!1 &1459979829
 GameObject:
   m_ObjectHideFlags: 0
