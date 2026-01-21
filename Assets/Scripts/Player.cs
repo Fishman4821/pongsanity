@@ -14,6 +14,26 @@ public class Player : MonoBehaviour
     }
     public PaddleType playerType;
 
+    public void basicPaddleSet()
+    {
+        playerType = PaddleType.Paddle;
+    }
+
+    public void doublePaddleSet()
+    {
+        playerType = PaddleType.Double;
+    }
+
+    public void triPaddleSet()
+    {
+        playerType = PaddleType.Three;
+    }
+
+    public void launcherSet()
+    {
+        playerType = PaddleType.Launcher;
+    }
+
     void Start()
     {
         switch (playerType)
