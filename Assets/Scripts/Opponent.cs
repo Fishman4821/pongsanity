@@ -1,32 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PaddleType;
 
 public class Opponent : MonoBehaviour
 {
-    public enum PaddleType
-    {
-        Paddle,
-        Double,
-        Three,
-        Launcher
-    }
-    public PaddleType opponentType;
+    public Character opponentType;
 
     void Start()
     {
+        opponentType = GameObject.Find("CharacterSelector").GetComponent<CharacterSelector>().opponentCharacter;
         switch (opponentType)
         {
-            case PaddleType.Paddle:
+            case Character.Paddle:
                 OpponentPaddle p = gameObject.AddComponent<OpponentPaddle>();
                 break;
-            case PaddleType.Double:
+            case Character.Double:
                 OpponentDouble d = gameObject.AddComponent<OpponentDouble>();
                 break;
-            case PaddleType.Three:
+            case Character.Three:
                 OpponentThree t = gameObject.AddComponent<OpponentThree>();
                 break;
-            case PaddleType.Launcher:
+            case Character.Launcher:
                 OpponentLauncher l = gameObject.AddComponent<OpponentLauncher>();
                 break;
         }

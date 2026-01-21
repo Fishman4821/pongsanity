@@ -2,52 +2,27 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PaddleType;
 
 public class Player : MonoBehaviour
 {
-    public enum PaddleType
-    {
-        Paddle,
-        Double,
-        Three,
-        Launcher
-    }
-    public PaddleType playerType;
-
-    public void basicPaddleSet()
-    {
-        playerType = PaddleType.Paddle;
-    }
-
-    public void doublePaddleSet()
-    {
-        playerType = PaddleType.Double;
-    }
-
-    public void triPaddleSet()
-    {
-        playerType = PaddleType.Three;
-    }
-
-    public void launcherSet()
-    {
-        playerType = PaddleType.Launcher;
-    }
+    public Character playerType;
 
     void Start()
     {
+        playerType = GameObject.Find("CharacterSelector").GetComponent<CharacterSelector>().playerCharacter;
         switch (playerType)
         {
-            case PaddleType.Paddle:
+            case Character.Paddle:
                 Paddle p = gameObject.AddComponent<Paddle>();
                 break;
-            case PaddleType.Double:
+            case Character.Double:
                 Double d = gameObject.AddComponent<Double>();
                 break;
-            case PaddleType.Three:
+            case Character.Three:
                 Three t = gameObject.AddComponent<Three>();
                 break;
-            case PaddleType.Launcher:
+            case Character.Launcher:
                 Launcher l = gameObject.AddComponent<Launcher>();
                 break;
         }
