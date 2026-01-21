@@ -22,7 +22,7 @@ public class OpponentThree : Three
     void Update()
     {
         float predictedY = self.BallPredictedY(3.875f, float.NaN);
-        if (self.ballNotMoving())
+        if (self.ballNotMoving() && self.ballX > -1f)
         {
             if (pos < 0)
             {

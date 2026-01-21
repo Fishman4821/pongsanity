@@ -46,7 +46,7 @@ public abstract class Base : MonoBehaviour
 
     public void IncrementUltMeter()
     {
-        UltMeter = Mathf.Clamp(UltMeter + 0.25f, 0f, UltMeterMax);
+        if (!UltActive) UltMeter = Mathf.Clamp(UltMeter + 0.25f, 0f, UltMeterMax);
     }
 
     public bool UltReady()

@@ -5,6 +5,7 @@ using PaddleType;
 
 public class Opponent : MonoBehaviour
 {
+    public UltMeter meter;
     public Character opponentType;
 
     void Start()
@@ -29,5 +30,6 @@ public class Opponent : MonoBehaviour
                 OpponentLauncher l = gameObject.AddComponent<OpponentLauncher>();
                 break;
         }
+        meter.Init(gameObject, opponentType);
     }
 }

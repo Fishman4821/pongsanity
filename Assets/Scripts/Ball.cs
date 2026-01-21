@@ -102,6 +102,11 @@ public class Ball : MonoBehaviour
             rb.velocity = velocity;
         }
 
+        if (collision.gameObject.CompareTag("Top Double") || collision.gameObject.CompareTag("Bottom Double"))
+        {
+            collision.gameObject.transform.parent.GetComponent<Double>().IncrementUltMeter();
+        }
+
         if (collision.gameObject.TryGetComponent<Base>(out var obj))
         {
             obj.IncrementUltMeter();

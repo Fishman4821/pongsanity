@@ -357,8 +357,58 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: -0}
-  m_SizeDelta: {x: 11.2, y: 6}
+  m_SizeDelta: {x: 12, y: 6}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &167505441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 167505443}
+  - component: {fileID: 167505442}
+  m_Layer: 0
+  m_Name: OpponentUltMeter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &167505442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167505441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c0be0a01c8ff54ea9b0f6cd205f155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: 0
+  player: {fileID: 0}
+  Opponent: 1
+  height: 0.25
+  c1: {r: 0.05882353, g: 0.05882353, b: 0.05882353, a: 1}
+  c2: {r: 0.3019608, g: 0.3019608, b: 0.3019608, a: 1}
+--- !u!4 &167505443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167505441}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.25, y: -2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &368889083
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,6 +484,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 368889083}
   m_CullTransparentMesh: 1
+--- !u!1 &406008482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 406008484}
+  - component: {fileID: 406008483}
+  m_Layer: 0
+  m_Name: PlayerUltMeter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &406008483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406008482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c0be0a01c8ff54ea9b0f6cd205f155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: 0
+  player: {fileID: 0}
+  Opponent: 0
+  height: 0.25
+  c1: {r: 0.05660379, g: 0.05660379, b: 0.05660379, a: 1}
+  c2: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
+--- !u!4 &406008484
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406008482}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.25, y: -2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &432512349
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,7 +1011,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3013718ee8d34cf4887cf8e736477fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerType: 0
+  meter: {fileID: 406008483}
+  playerType: 3
 --- !u!4 &640266177
 Transform:
   m_ObjectHideFlags: 0
@@ -921,7 +1022,7 @@ Transform:
   m_GameObject: {fileID: 640266175}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.27, y: -2.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1641,7 +1742,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e501b9137018c4299d91ada33b306c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  opponentType: 0
+  meter: {fileID: 167505442}
+  opponentType: 2
 --- !u!1 &1444473476
 GameObject:
   m_ObjectHideFlags: 0
@@ -2494,3 +2596,5 @@ SceneRoots:
   - {fileID: 800256295}
   - {fileID: 2123565262}
   - {fileID: 1001335631}
+  - {fileID: 406008484}
+  - {fileID: 167505443}

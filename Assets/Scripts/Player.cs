@@ -5,6 +5,7 @@ using PaddleType;
 
 public class Player : MonoBehaviour
 {
+    public UltMeter meter;
     public Character playerType;
 
     void Start()
@@ -29,5 +30,6 @@ public class Player : MonoBehaviour
                 Launcher l = gameObject.AddComponent<Launcher>();
                 break;
         }
+        meter.Init(gameObject, playerType);
     }
 }

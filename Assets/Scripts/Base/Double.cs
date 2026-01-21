@@ -48,6 +48,7 @@ public class Double : Base
         BottomDouble bottom = bottomObj.AddComponent<BottomDouble>();
         bottom.topRb = topRb;
         bottomObj.tag = "Bottom Double";
+        topObj.tag = "Top Double";
     }
 
     protected void ClampYPosition()
@@ -83,7 +84,7 @@ public class Double : Base
         topRb.velocity = velocity;
 
         ClampYPosition();
-        
+
         UpdateUlt();
         if (ball.GetComponent<Ball>().doubleScore == false && UltActive)
         {
