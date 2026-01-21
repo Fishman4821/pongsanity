@@ -9,7 +9,11 @@ public class Opponent : MonoBehaviour
 
     void Start()
     {
-        opponentType = GameObject.Find("CharacterSelector").GetComponent<CharacterSelector>().opponentCharacter;
+        GameObject cs = GameObject.Find("CharacterSelector");
+        if (cs != null)
+        {
+            opponentType = cs.GetComponent<CharacterSelector>().opponentCharacter;
+        }
         switch (opponentType)
         {
             case Character.Paddle:

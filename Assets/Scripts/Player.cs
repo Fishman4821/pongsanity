@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +9,11 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        playerType = GameObject.Find("CharacterSelector").GetComponent<CharacterSelector>().playerCharacter;
+        GameObject cs = GameObject.Find("CharacterSelector");
+        if (cs != null)
+        {
+            playerType = cs.GetComponent<CharacterSelector>().playerCharacter;
+        }
         switch (playerType)
         {
             case Character.Paddle:
