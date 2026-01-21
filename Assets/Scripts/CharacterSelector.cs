@@ -37,6 +37,12 @@ public class CharacterSelector : MonoBehaviour
 
     void Awake()
     {
+        int numCharacterSelectors = FindObjectsOfType<CharacterSelector>().Length;
+        if (numCharacterSelectors != 1)
+        {
+            Destroy(this.gameObject);
+        }
+
         DontDestroyOnLoad(gameObject);
     }
 }
