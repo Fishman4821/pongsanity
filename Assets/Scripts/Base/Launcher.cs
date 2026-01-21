@@ -59,25 +59,49 @@ public class Launcher : Base
     protected override void Init()
     {
         gameObject.tag = "Launcher";
+        bc = gameObject.AddComponent<BoxCollider2D>();
+        bc.size = new Vector2(0.75f / 2f, 0.75f - 0.125f);
+        bc.isTrigger = true;
         if (Opponent)
         {
             transform.position = new Vector3(4f, 0, 0);
+            bc.offset = new Vector2(0.125f - 0.125f / 4f + 0.125f / 8f, 0);
         }
         else
         {
             transform.position = new Vector3(-4f, 0, 0);
+            bc.offset = new Vector2(0.125f + 0.125f / 4f - 0.125f / 8f - 0.25f, 0);
         }
         InitShape();
-        bc = gameObject.AddComponent<BoxCollider2D>();
-        bc.size = new Vector2(0.75f / 2f, 0.75f - 0.125f);
-        bc.offset = new Vector2(0.125f + 0.125f / 4f - 0.125f / 8f - 0.25f, 0);
-        bc.isTrigger = true;
         rb = gameObject.AddComponent<Rigidbody2D>();
         rb.gravityScale = 0;
         rb.constraints = RigidbodyConstraints2D.FreezePositionX;
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         ball = GameObject.FindWithTag("Ball");
+    }
+
+    protected void ResetRotation()
+    {
+        if (transform.rotation.eulerAngles.z > 0.01f || transform.rotation.eulerAngles.z < -0.01f)
+        {
+            rb.angularVelocity = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, 0, 1) - transform.rotation.eulerAngles.z < 0 ? -turnSpeed : turnSpeed;
+        }
+        else
+        {
+            rb.angularVelocity = 0;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+    }
+
+    protected void Launch()
+    {
+        ball.GetComponent<Rigidbody2D>().velocity = (UltActive ? ultForceMult : 1f) * ball.GetComponent<Ball>().impulse * new Vector2(Mathf.Cos(transform.rotation.eulerAngles.z * Mathf.Deg2Rad), Mathf.Sin(transform.rotation.eulerAngles.z * Mathf.Deg2Rad));
+        holdingBall = false;
+        if (UltActive)
+        {
+            ResetUlt();
+        }
     }
 
     void Update()
@@ -103,15 +127,7 @@ public class Launcher : Base
         }
         else
         {
-            if (transform.rotation.eulerAngles.z > 0.01f || transform.rotation.eulerAngles.z < -0.01f)
-            {
-                rb.angularVelocity = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, 0, 1) - transform.rotation.eulerAngles.z < 0 ? -turnSpeed : turnSpeed;
-            }
-            else
-            {
-                rb.angularVelocity = 0;
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
+            ResetRotation();
 
             Vector3 pos = transform.position;
             if (pos.y > boundY)
@@ -142,12 +158,7 @@ public class Launcher : Base
 
         if (Input.GetKeyUp(KeyCode.W) && holdingBall)
         {
-            ball.GetComponent<Rigidbody2D>().velocity = (UltActive ? ultForceMult : 1f) * ball.GetComponent<Ball>().impulse * new Vector2(Mathf.Cos(transform.rotation.eulerAngles.z * Mathf.Deg2Rad), Mathf.Sin(transform.rotation.eulerAngles.z * Mathf.Deg2Rad));
-            holdingBall = false;
-            if (UltActive)
-            {
-                ResetUlt();
-            }
+            Launch();
         }
 
         UpdateUlt();
