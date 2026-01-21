@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using OpponentHelper;
-using Unity.VisualScripting;
 
 public class OpponentDouble : Double
 {
@@ -86,10 +85,10 @@ public class OpponentDouble : Double
                 }
             } while (false);
         }
-        Debug.DrawLine(new Vector3(self.X, self.Y + self.paddleHeight / 2f, -2), new Vector3(self.X + 1f, self.Y + self.paddleHeight / 2f, -2), Color.green, 0f, false);
-        Debug.DrawLine(new Vector3(self.X, self.Y - self.paddleHeight / 2f, -2), new Vector3(self.X + 1f, self.Y - self.paddleHeight / 2f, -2), Color.blue, 0f, false);
-        Debug.DrawLine(new Vector3(self.X, -self.Y + self.paddleHeight / 2f, -2), new Vector3(self.X + 1f, -self.Y + self.paddleHeight / 2f, -2), Color.magenta, 0f, false);
-        Debug.DrawLine(new Vector3(self.X, -self.Y - self.paddleHeight / 2f, -2), new Vector3(self.X + 1f, -self.Y - self.paddleHeight / 2f, -2), Color.red, 0f, false);
+        // Debug.DrawLine(new Vector3(self.X, self.Y + self.paddleHeight / 2f, -2), new Vector3(self.X + 1f, self.Y + self.paddleHeight / 2f, -2), Color.green, 0f, false);
+        // Debug.DrawLine(new Vector3(self.X, self.Y - self.paddleHeight / 2f, -2), new Vector3(self.X + 1f, self.Y - self.paddleHeight / 2f, -2), Color.blue, 0f, false);
+        // Debug.DrawLine(new Vector3(self.X, -self.Y + self.paddleHeight / 2f, -2), new Vector3(self.X + 1f, -self.Y + self.paddleHeight / 2f, -2), Color.magenta, 0f, false);
+        // Debug.DrawLine(new Vector3(self.X, -self.Y - self.paddleHeight / 2f, -2), new Vector3(self.X + 1f, -self.Y - self.paddleHeight / 2f, -2), Color.red, 0f, false);
 
         Debug.DrawLine(new Vector3(4f, predictedY < -0.3f ? -self.Y : self.Y, -2), new Vector3(3f, predictedY < -0.3f ? -self.Y + topRb.velocity.y / 14.0f : self.Y + topRb.velocity.y / 74.0f, -2), Color.cyan, 0, false);
         if (UltReady() && self.ballX < 4.125f)
@@ -105,5 +104,6 @@ public class OpponentDouble : Double
         // Debug.Log("Predicted Y: " + predictedY.ToString("F2") + " Paddle Y: " + self.Y.ToString("F2") + " Vel Y: " + self.rb.velocity.y.ToString("F2") + " Ball Vel X: " + self.ballX.ToString("F2"));
 
         ClampYPosition();
+        UpdateUlt();
     }
 }

@@ -30,7 +30,7 @@ public abstract class Base : MonoBehaviour
             }
         }
 
-        if (UltMeter >= UltMeterMax && !UltActive && Input.GetKeyDown(KeyCode.Space))
+        if (!Opponent && Input.GetKeyDown(KeyCode.Space) && UltReady())
         {
             Ult();
         }

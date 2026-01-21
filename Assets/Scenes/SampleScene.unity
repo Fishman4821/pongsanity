@@ -703,7 +703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3013718ee8d34cf4887cf8e736477fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerType: 3
+  playerType: 0
 --- !u!4 &640266177
 Transform:
   m_ObjectHideFlags: 0
@@ -1150,7 +1150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e501b9137018c4299d91ada33b306c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  opponentType: 0
+  opponentType: 2
 --- !u!1 &1459979829
 GameObject:
   m_ObjectHideFlags: 0

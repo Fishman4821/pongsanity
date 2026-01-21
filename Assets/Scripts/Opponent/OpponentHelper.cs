@@ -98,6 +98,11 @@ namespace OpponentHelper
             return BallVelocity().x > 0;
         }
 
+        public bool ballNotMoving()
+        {
+            return BallVelocity() == Vector2.zero;
+        }
+
         private Vector2 previousBallVelocity = Vector2.zero;
         public bool ballVelChanged
         {
@@ -147,16 +152,6 @@ namespace OpponentHelper
                 }
             }
             return defaultY;
-        }
-
-        private IEnumerator WaitCoroutine(float seconds)
-        {
-            yield return new WaitForSeconds(seconds);
-        }
-
-        public void Wait(float seconds)
-        {
-            mb.StartCoroutine(WaitCoroutine(seconds));
         }
     }
 }

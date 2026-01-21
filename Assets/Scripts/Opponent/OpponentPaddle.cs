@@ -72,5 +72,6 @@ public class OpponentPaddle : Paddle
         // Debug.Log("Predicted Y: " + predictedY.ToString("F2") + " Paddle Y: " + self.Y.ToString("F2") + " Vel Y: " + self.rb.velocity.y.ToString("F2") + " Ball Vel X: " + self.ballX.ToString("F2"));
 
         self.ClampYPosition(-2.5f, 2.5f);
+        UpdateUlt();
     }
 }
