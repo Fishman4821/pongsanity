@@ -30,6 +30,19 @@ public class Ball : MonoBehaviour
         serveDirection = !serveDirection;
     }
 
+    IEnumerator FirstServe()
+    {
+        yield return new WaitForSeconds(4f);
+        float angle = UnityEngine.Random.Range(-45, 45);
+        if (serveDirection)
+        {
+            angle += 180;
+        }
+        Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+        rb.velocity = direction.normalized * impulse;
+        serveDirection = !serveDirection;
+    }
+
     void Reset()
     {
         doubleScore = false;
@@ -50,7 +63,7 @@ public class Ball : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         tr = GetComponent<TrailRenderer>();
         sr = GetComponent<SpriteRenderer>();
-        StartCoroutine(Serve());
+        StartCoroutine(FirstServe());
     }
 
 
