@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Launcher : Base
 {
-    public float speed = 5f;
+    public float speed = 6f;
     public float turnSpeed = 400f;
     public float boundY = 2.625f;
     public float ultForceMult = 2.5f;
@@ -85,18 +85,19 @@ public class Launcher : Base
     {
         if (transform.rotation.eulerAngles.z > 0.01f || transform.rotation.eulerAngles.z < -0.01f)
         {
-            rb.angularVelocity = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, 0, 1) - transform.rotation.eulerAngles.z < 0 ? -turnSpeed : turnSpeed;
+            // rb.angularVelocity = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, 0, 1) - transform.rotation.eulerAngles.z < 0 ? -turnSpeed : turnSpeed;
+            transform.rotation = Quaternion.Euler(0f, 0f, Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, 0, turnSpeed * Time.deltaTime));
         }
         else
         {
-            rb.angularVelocity = 0;
+            // rb.angularVelocity = 0;
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
 
-    protected void Launch()
+    protected void Launch(float angleOffset = 0f)
     {
-        ball.GetComponent<Rigidbody2D>().velocity = (UltActive ? ultForceMult : 1f) * ball.GetComponent<Ball>().impulse * new Vector2(Mathf.Cos(transform.rotation.eulerAngles.z * Mathf.Deg2Rad), Mathf.Sin(transform.rotation.eulerAngles.z * Mathf.Deg2Rad));
+        ball.GetComponent<Rigidbody2D>().velocity = (UltActive ? ultForceMult : 1f) * ball.GetComponent<Ball>().impulse * new Vector2(Mathf.Cos((transform.rotation.eulerAngles.z + angleOffset) * Mathf.Deg2Rad), Mathf.Sin((transform.rotation.eulerAngles.z + angleOffset) * Mathf.Deg2Rad));
         holdingBall = false;
         if (UltActive)
         {

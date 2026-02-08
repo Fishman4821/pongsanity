@@ -1140,7 +1140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meter: {fileID: 406008483}
-  playerType: 0
+  playerType: 3
 --- !u!4 &640266177
 Transform:
   m_ObjectHideFlags: 0

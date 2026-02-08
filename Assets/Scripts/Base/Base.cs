@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,14 +35,6 @@ public abstract class Base : MonoBehaviour
         {
             Ult();
         }
-    }
-
-    protected bool Waited = false;
-
-    protected IEnumerator Wait(float s)
-    {
-        yield return new WaitForSecondsRealtime(s);
-        Waited = true;
     }
 
     public void IncrementUltMeter()
