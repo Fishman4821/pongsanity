@@ -5,13 +5,11 @@ using OpponentHelper;
 
 public class OpponentDouble : Double
 {
-    public float reactionTime = 0.35f;
-    public float reactionVariance = 0.2f;
-    public float overshootTime = 0.2f;
-    public float overshootVariance = 0.1f;
+    public float reactionTime = 0.1f;
+    public float reactionVariance = 0.05f;
+    public float overshootTime = 0.06f;
+    public float overshootVariance = 0.01f;
     public float overshootBias = 0.85f;
-
-    private bool reacting = false;
 
     protected override bool Opponent { get; set; } = true;
 
@@ -22,24 +20,49 @@ public class OpponentDouble : Double
         self = new Self(topObj, topRb, ball, speed, 1f);
     }
 
+    private float waitTime = 0f;
+    private float timeWaited = 0f;
+    private float ultWaitTime = 0f;
+    private float ultTimeWaited = 0f;
+
+    public enum State
+    {
+        Idle,
+        Reacting,
+        Moving,
+        Stopping,
+    }
+
+    public State state = State.Idle;
+
     void Update()
     {
         float predictedY = self.BallPredictedY(3.875f, float.NaN);
 
-        Debug.DrawLine(new Vector3(3.875f, !float.IsNaN(predictedY) ? predictedY : -10, -2), new Vector3(4.875f, !float.IsNaN(predictedY) ? predictedY : -10, -2), Color.yellow, 0.5f, false);
+        // Debug.DrawLine(new Vector3(3.875f, !float.IsNaN(predictedY) ? predictedY : -10, -2), new Vector3(4.875f, !float.IsNaN(predictedY) ? predictedY : -10, -2), Color.yellow, 0.5f, false);
 
-        if (self.BallSide() && !float.IsNaN(predictedY))
+        switch (state)
         {
-            do
-            {
-                if (!reacting) StartCoroutine(Wait(reactionTime + Random.Range(-reactionVariance, reactionVariance)));
-                if (!reacting && Waited)
+            case State.Idle:
+                if (self.BallSide() && !float.IsNaN(predictedY))
                 {
-                    Waited = false;
-                    break;
+                    state = State.Reacting;
                 }
-                
-                reacting = true;
+                break;
+            case State.Reacting:
+                if (waitTime == 0f)
+                {
+                    waitTime = reactionTime + Random.Range(-reactionVariance, reactionVariance);
+                }
+                timeWaited += Time.deltaTime;
+                if (timeWaited >= waitTime)
+                {
+                    waitTime = 0f;
+                    timeWaited = 0f;
+                    state = State.Moving;
+                }
+                break;
+            case State.Moving:
                 if (predictedY > -0.3f)
                 {
                     if (predictedY > self.Y + self.paddleHeight / 2f)
@@ -52,51 +75,59 @@ public class OpponentDouble : Double
                     }
                     else
                     {
-                        StartCoroutine(Wait(overshootTime + Random.Range(-overshootVariance, overshootVariance) + overshootBias * overshootVariance));
-                        if (Waited)
-                        {
-                            Waited = false;
-                            self.Stop();
-                            reacting = false;
-                        }
+                        state = State.Stopping;
                     }
                 }
                 else
                 {
-
-                    if (predictedY > -self.Y + self.paddleHeight / 2f && reacting)
+                    if (predictedY > -self.Y + self.paddleHeight / 2f)
                     {
                         self.MoveDown();
                     }
-                    else if (predictedY < -self.Y - self.paddleHeight / 2f && reacting)
+                    else if (predictedY < -self.Y - self.paddleHeight / 2f)
                     {
                         self.MoveUp();
                     }
                     else
                     {
-                        StartCoroutine(Wait(overshootTime + Random.Range(-overshootVariance, overshootVariance) + overshootBias * overshootVariance));
-                        if (Waited)
-                        {
-                            Waited = false;
-                            self.Stop();
-                            reacting = false;
-                        }
+                        state = State.Stopping;
                     }
                 }
-            } while (false);
+                break;
+            case State.Stopping:
+                if (waitTime == 0f)
+                {
+                    waitTime = overshootTime + Random.Range(-overshootVariance, overshootVariance) + overshootBias * overshootVariance;
+                }
+                timeWaited += Time.deltaTime;
+                if (timeWaited >= waitTime)
+                {
+                    waitTime = 0f;
+                    timeWaited = 0f;
+                    self.Stop();
+                    state = State.Idle;
+                }
+                break;
         }
+
+        
         // Debug.DrawLine(new Vector3(self.X, self.Y + self.paddleHeight / 2f, -2), new Vector3(self.X + 1f, self.Y + self.paddleHeight / 2f, -2), Color.green, 0f, false);
         // Debug.DrawLine(new Vector3(self.X, self.Y - self.paddleHeight / 2f, -2), new Vector3(self.X + 1f, self.Y - self.paddleHeight / 2f, -2), Color.blue, 0f, false);
         // Debug.DrawLine(new Vector3(self.X, -self.Y + self.paddleHeight / 2f, -2), new Vector3(self.X + 1f, -self.Y + self.paddleHeight / 2f, -2), Color.magenta, 0f, false);
         // Debug.DrawLine(new Vector3(self.X, -self.Y - self.paddleHeight / 2f, -2), new Vector3(self.X + 1f, -self.Y - self.paddleHeight / 2f, -2), Color.red, 0f, false);
 
-        Debug.DrawLine(new Vector3(4f, predictedY < -0.3f ? -self.Y : self.Y, -2), new Vector3(3f, predictedY < -0.3f ? -self.Y + topRb.velocity.y / 14.0f : self.Y + topRb.velocity.y / 74.0f, -2), Color.cyan, 0, false);
-        if (UltReady() && self.ballX < 4.125f)
+        // Debug.DrawLine(new Vector3(4f, predictedY < -0.3f ? -self.Y : self.Y, -2), new Vector3(3f, predictedY < -0.3f ? -self.Y + topRb.velocity.y / 14.0f : self.Y + topRb.velocity.y / 74.0f, -2), Color.cyan, 0, false);
+        if (UltReady() && self.ballX < -3f)
         {
-            StartCoroutine(Wait(Random.Range(0f, reactionTime)));
-            if (Waited)
+            if (ultWaitTime == 0f)
             {
-                Waited = false;
+                ultWaitTime = Random.Range(0f, reactionTime);
+            }
+            ultTimeWaited += Time.deltaTime;
+            if (ultTimeWaited >= ultWaitTime)
+            {
+                ultWaitTime = 0f;
+                ultTimeWaited = 0f;
                 Ult();
             }
         }
