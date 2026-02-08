@@ -6,8 +6,8 @@ using OpponentHelper;
 
 public class OpponentThree : Three
 {
-    public float reactionTime = 0.1f;
-    public float reactionVariance = 0.05f;
+    public float reactionTime = 0.07f;
+    public float reactionVariance = 0.02f;
     private bool reacting = false;
 
     protected override bool Opponent { get; set; } = true;
@@ -18,6 +18,9 @@ public class OpponentThree : Three
     {
         self = new Self(gameObject, ball, speed, 2f);
     }
+
+    private float waitTime = 0f;
+    private float timeWaited = 0f;
 
     void Update()
     {
@@ -37,13 +40,22 @@ public class OpponentThree : Three
         {
             do
             {
-                if (!reacting) StartCoroutine(Wait(reactionTime + Random.Range(-reactionVariance, reactionVariance)));
-                if (!reacting && Waited)
+                if (!reacting)
                 {
-                    Waited = false;
-                    break;
+                    if (waitTime == 0f) {
+                        waitTime = reactionTime + Random.Range(-reactionVariance, reactionVariance);
+                    }
+                    timeWaited += Time.deltaTime;
+                    if (timeWaited >= waitTime)
+                    {
+                        waitTime = 0f;
+                        timeWaited = 0f;
+                        reacting = true;
+                    } else
+                    {
+                        break;
+                    }
                 }
-                reacting = true;
                 if (UltReady() && (predictedY > 1f && pos == -1 || predictedY < -1f && pos == 1))
                 {
                     Ult();
