@@ -6,6 +6,8 @@ using System;
 using UnityEditor.SearchService;
 using UnityEngine.SceneManagement;
 
+using static NextScene;
+
 public class CharacterSelector : MonoBehaviour
 {
     public Character playerCharacter;
@@ -35,14 +37,13 @@ public class CharacterSelector : MonoBehaviour
         };
     }
 
-    void Awake()
+    public void confirm()
     {
-        int numCharacterSelectors = FindObjectsOfType<CharacterSelector>().Length;
-        if (numCharacterSelectors != 1)
-        {
-            Destroy(this.gameObject);
-        }
-
-        DontDestroyOnLoad(gameObject);
+        GameObject data = new GameObject("CharacterData");
+        CharacterData characterData = data.AddComponent<CharacterData>();
+        characterData.playerCharacter = playerCharacter;
+        characterData.opponentCharacter = opponentCharacter;
+        DontDestroyOnLoad(data);
+        LoadNextInBuild();
     }
 }

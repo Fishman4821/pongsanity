@@ -10,10 +10,10 @@ public class Opponent : MonoBehaviour
 
     void Start()
     {
-        GameObject cs = GameObject.Find("CharacterSelector");
+        GameObject cs = GameObject.Find("CharacterData");
         if (cs != null)
         {
-            opponentType = cs.GetComponent<CharacterSelector>().opponentCharacter;
+            opponentType = cs.GetComponent<CharacterData>().opponentCharacter;
         }
         switch (opponentType)
         {

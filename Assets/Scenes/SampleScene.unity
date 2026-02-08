@@ -1140,7 +1140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meter: {fileID: 406008483}
-  playerType: 3
+  playerType: 0
 --- !u!4 &640266177
 Transform:
   m_ObjectHideFlags: 0
@@ -1871,7 +1871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meter: {fileID: 167505442}
-  opponentType: 2
+  opponentType: 3
 --- !u!1 &1444473476
 GameObject:
   m_ObjectHideFlags: 0

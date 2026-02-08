@@ -10,10 +10,10 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        GameObject cs = GameObject.Find("CharacterSelector");
+        GameObject cs = GameObject.Find("CharacterData");
         if (cs != null)
         {
-            playerType = cs.GetComponent<CharacterSelector>().playerCharacter;
+            playerType = cs.GetComponent<CharacterData>().playerCharacter;
         }
         switch (playerType)
         {
