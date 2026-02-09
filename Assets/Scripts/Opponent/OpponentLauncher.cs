@@ -12,7 +12,7 @@ public class OpponentLauncher : Launcher
     public float launchVariance = 1.75f;
     public float launchBias = -0.25f;
     public float ultChance = 0.05f;
-    protected override bool Opponent { get; set; } = true;
+    public override bool Opponent { get; set; } = true;
     private Self self;
     private GameObject player;
 

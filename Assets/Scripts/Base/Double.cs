@@ -69,11 +69,11 @@ public class Double : Base
     void Update()
     {
         Vector2 velocity = topRb.velocity;
-        if (Input.GetKey(KeyCode.W))
+        if (UpKey())
         {
             velocity.y = speed;
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (DownKey())
         {
             velocity.y = -speed;
         }

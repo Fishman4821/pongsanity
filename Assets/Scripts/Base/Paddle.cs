@@ -36,11 +36,11 @@ public class Paddle : Base
     void Update()
     {
         Vector2 velocity = rb.velocity;
-        if (Input.GetKey(KeyCode.W))
+        if (UpKey())
         {
             velocity.y = speed;
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (DownKey())
         {
             velocity.y = -speed;
         }

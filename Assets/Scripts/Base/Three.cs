@@ -64,11 +64,11 @@ public class Three : Base
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (UpKey())
         {
             MoveUp();
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+        else if (DownKey())
         {
             MoveDown();
         }
