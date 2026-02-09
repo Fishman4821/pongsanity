@@ -10,7 +10,7 @@ public class OpponentPaddle : Paddle
     public float overshootBias = 0.65f;
     public float ultChance = 0.01f;
 
-    protected override bool Opponent { get; set; } = true;
+    public override bool Opponent { get; set; } = true;
 
     private Self self;
 

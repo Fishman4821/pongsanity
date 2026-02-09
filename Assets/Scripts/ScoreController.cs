@@ -35,6 +35,7 @@ public class ScoreController : MonoBehaviour
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>();
         playerScoreText.text = playerScore.ToString();
         opponentScoreText.text = opponentScore.ToString();

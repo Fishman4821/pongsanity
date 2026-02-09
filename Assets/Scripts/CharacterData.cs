@@ -8,4 +8,5 @@ public class CharacterData : MonoBehaviour
 {
     public Character playerCharacter;
     public Character opponentCharacter;
+    public bool twoPlayer;
 }

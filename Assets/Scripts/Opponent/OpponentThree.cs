@@ -10,7 +10,7 @@ public class OpponentThree : Three
     public float reactionVariance = 0.02f;
     private bool reacting = false;
 
-    protected override bool Opponent { get; set; } = true;
+    public override bool Opponent { get; set; } = true;
 
     private Self self;
 

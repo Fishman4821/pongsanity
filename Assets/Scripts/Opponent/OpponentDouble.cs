@@ -11,7 +11,7 @@ public class OpponentDouble : Double
     public float overshootVariance = 0.01f;
     public float overshootBias = 0.85f;
 
-    protected override bool Opponent { get; set; } = true;
+    public override bool Opponent { get; set; } = true;
 
     private Self self;
 

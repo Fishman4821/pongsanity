@@ -12,8 +12,9 @@ public class CharacterSelector : MonoBehaviour
 {
     public Character playerCharacter;
     public Character opponentCharacter;
+    public bool twoPlayer;
 
-    public void setPlayer(int c)
+    public void SetPlayer(int c)
     {
         playerCharacter = c switch
         {
@@ -25,7 +26,7 @@ public class CharacterSelector : MonoBehaviour
         };
     }
 
-    public void setOpponent(int c)
+    public void SetOpponent(int c)
     {
         opponentCharacter = c switch
         {
@@ -37,12 +38,18 @@ public class CharacterSelector : MonoBehaviour
         };
     }
 
-    public void confirm()
+    public void SetTwoPlayer(bool twoPlayer_)
+    {
+        twoPlayer = twoPlayer_;
+    }
+
+    public void Confirm()
     {
         GameObject data = new GameObject("CharacterData");
         CharacterData characterData = data.AddComponent<CharacterData>();
         characterData.playerCharacter = playerCharacter;
         characterData.opponentCharacter = opponentCharacter;
+        characterData.twoPlayer = twoPlayer;
         DontDestroyOnLoad(data);
         LoadNextInBuild();
     }

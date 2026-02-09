@@ -111,11 +111,11 @@ public class Launcher : Base
         {
             rb.velocity = Vector2.zero;
             float angVel;
-            if (Input.GetKey(KeyCode.A))
+            if (LeftKey())
             {
                 angVel = turnSpeed;
             }
-            else if (Input.GetKey(KeyCode.D))
+            else if (RightKey())
             {
                 angVel = -turnSpeed;
             }
@@ -142,11 +142,11 @@ public class Launcher : Base
             transform.position = pos;
 
             Vector2 velocity = rb.velocity;
-            if (Input.GetKey(KeyCode.W))
+            if (UpKey())
             {
                 velocity.y = speed;
             }
-            else if (Input.GetKey(KeyCode.S))
+            else if (DownKey())
             {
                 velocity.y = -speed;
             }
@@ -157,9 +157,15 @@ public class Launcher : Base
             rb.velocity = velocity;
         }
 
-        if (Input.GetKeyUp(KeyCode.W) && holdingBall)
+        if (UpKeyUp() && holdingBall)
         {
-            Launch();
+            if (twoPlayer && Opponent)
+            {
+                Launch(180f);
+            } else
+            {   
+                Launch();
+            }
         }
 
         UpdateUlt();
