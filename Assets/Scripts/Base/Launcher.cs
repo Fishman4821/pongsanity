@@ -83,7 +83,7 @@ public class Launcher : Base
 
     protected void ResetRotation()
     {
-        if (transform.rotation.eulerAngles.z > 0.01f || transform.rotation.eulerAngles.z < -0.01f)
+        if (transform.rotation.eulerAngles.z > 0.1f || transform.rotation.eulerAngles.z < -0.1f) // 0.01
         {
             // rb.angularVelocity = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, 0, 1) - transform.rotation.eulerAngles.z < 0 ? -turnSpeed : turnSpeed;
             transform.rotation = Quaternion.Euler(0f, 0f, Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, 0, turnSpeed * Time.deltaTime));
