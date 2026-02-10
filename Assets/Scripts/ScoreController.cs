@@ -14,28 +14,46 @@ public class ScoreController : MonoBehaviour
     public TextMeshProUGUI countDownText;
     public AudioSource audioSource;
     public bool started = false;
+    public bool overtime = false;
+    private bool twoPlayer = false;
     private Ball ball;
-    private float timer = 180f;
+    public float timer = 180f;
     private float countDown = 4f;
 
     void EndGame()
     {
         if (playerScore > opponentScore)
         {
-            SceneManager.LoadScene("PlayerWin");
+            if (twoPlayer)
+            {
+                SceneManager.LoadScene("PlayerOneWin");
+            }
+            else
+            {
+                SceneManager.LoadScene("PlayerWin");
+            }
         }
         else if (playerScore < opponentScore)
         {
-            SceneManager.LoadScene("ComputerWin");
+            if (twoPlayer)
+            {
+                SceneManager.LoadScene("PlayerTwoWin");
+            }
+            else
+            {
+                SceneManager.LoadScene("ComputerWin");
+            }
         }
         else
         {
-            SceneManager.LoadScene("Tiebreaker");
+            // SceneManager.LoadScene("Tiebreaker");
+            overtime = true;
         }
     }
 
     void Start()
     {
+        twoPlayer = GameObject.Find("CharacterData").GetComponent<CharacterData>().twoPlayer;
         audioSource = GetComponent<AudioSource>();
         ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>();
         playerScoreText.text = playerScore.ToString();
@@ -46,24 +64,33 @@ public class ScoreController : MonoBehaviour
     void Update()
     {
         if (started)
-        {   
-            timer -= Time.deltaTime;
+        {
+            if (overtime)
+            {
+                timer += Time.deltaTime;
+            }
+            else
+            {
+                timer -= Time.deltaTime;
+            }
 
-            timerText.text = (int)Mathf.Max(timer / 60f, 0) + ":" + ((int)(Mathf.Max(timer, 0) % 60f)).ToString("00");
+            timerText.text = (overtime ? "+" : "") + (int)Mathf.Max(timer / 60f, 0) + ":" + ((int)(Mathf.Max(timer, 0) % 60f)).ToString("00");
 
             if (timer <= 0f)
             {
                 EndGame();
             }
-        } else
+        }
+        else
         {
             countDown -= Time.deltaTime;
-            
+
             if (Mathf.Floor(countDown) > 0)
             {
                 countDownText.text = Mathf.Floor(countDown).ToString();
                 audioSource.Play();
-            } else
+            }
+            else
             {
                 countDownText.text = "Go!";
             }
@@ -79,11 +106,19 @@ public class ScoreController : MonoBehaviour
     {
         playerScore += scoreValue;
         playerScoreText.text = playerScore.ToString();
+        if (overtime)
+        {
+            EndGame();
+        }
     }
 
     public void IncrementOpponentScore(int scoreValue)
     {
         opponentScore += scoreValue;
         opponentScoreText.text = opponentScore.ToString();
+        if (overtime)
+        {
+            EndGame();
+        }
     }
 }

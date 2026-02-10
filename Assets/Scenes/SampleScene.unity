@@ -2084,8 +2084,10 @@ MonoBehaviour:
   opponentScoreText: {fileID: 931064526}
   timerText: {fileID: 495746172}
   countDownText: {fileID: 684182339}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 1239594952}
   started: 0
+  overtime: 0
+  timer: 180
 --- !u!4 &1239594951
 Transform:
   m_ObjectHideFlags: 0
