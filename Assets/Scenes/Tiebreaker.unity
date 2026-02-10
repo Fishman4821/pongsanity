@@ -2086,6 +2086,8 @@ MonoBehaviour:
   countDownText: {fileID: 684182339}
   audioSource: {fileID: 0}
   started: 0
+  overtime: 0
+  timer: 180
 --- !u!4 &1239594951
 Transform:
   m_ObjectHideFlags: 0
