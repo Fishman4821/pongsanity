@@ -779,8 +779,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4288651167
-  m_fontColor: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2111,7 +2111,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4cef89035bf29db4f909a260846628a5, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2412,7 +2412,7 @@ MonoBehaviour:
   dashWidth: 0.1
   gapLength: 0.2
   yOffset: -4.2
-  dashColor: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
+  dashColor: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 1}
 --- !u!4 &1459979831
 Transform:
   m_ObjectHideFlags: 0
@@ -2642,7 +2642,7 @@ MonoBehaviour:
   impulse: 7.5
   drag: 0.01
   boost: 0.001
-  doubleScore: 0
+  scoreValue: 1
   score: {fileID: 1239594950}
   audioSource: {fileID: 201157301}
   bounceBonk: {fileID: 8300000, guid: 1c4486528da85c546badfbbc9d7cfb12, type: 3}

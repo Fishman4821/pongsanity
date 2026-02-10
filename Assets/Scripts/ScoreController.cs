@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreController : MonoBehaviour
 {
@@ -15,21 +16,21 @@ public class ScoreController : MonoBehaviour
     public bool started = false;
     private Ball ball;
     private float timer = 180f;
-    private float countDown = 3f;
+    private float countDown = 4f;
 
     void EndGame()
     {
         if (playerScore > opponentScore)
         {
-            
+            SceneManager.LoadScene("PlayerWin");
         }
         else if (playerScore < opponentScore)
         {
-            
+            SceneManager.LoadScene("ComputerWin");
         }
         else
         {
-            
+            SceneManager.LoadScene("Tiebreaker");
         }
     }
 
@@ -57,9 +58,11 @@ public class ScoreController : MonoBehaviour
         } else
         {
             countDown -= Time.deltaTime;
+            
             if (Mathf.Floor(countDown) > 0)
             {
                 countDownText.text = Mathf.Floor(countDown).ToString();
+                audioSource.Play();
             } else
             {
                 countDownText.text = "Go!";
@@ -67,7 +70,6 @@ public class ScoreController : MonoBehaviour
             if (countDown <= 0f)
             {
                 countDownText.gameObject.SetActive(false);
-                audioSource.Play();
                 ball.FirstServe();
             }
         }
