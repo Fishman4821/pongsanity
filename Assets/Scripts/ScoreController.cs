@@ -73,15 +73,15 @@ public class ScoreController : MonoBehaviour
         }
     }
 
-    public void IncrementPlayerScore(bool doublePoints)
+    public void IncrementPlayerScore(int scoreValue)
     {
-        playerScore += doublePoints ? 2 : 1;
+        playerScore += scoreValue;
         playerScoreText.text = playerScore.ToString();
     }
 
-    public void IncrementOpponentScore(bool doublePoints)
+    public void IncrementOpponentScore(int scoreValue)
     {
-        opponentScore += doublePoints ? 2 : 1;
+        opponentScore += scoreValue;
         opponentScoreText.text = opponentScore.ToString();
     }
 }

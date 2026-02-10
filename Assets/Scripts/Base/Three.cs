@@ -64,11 +64,11 @@ public class Three : Base
 
     void Update()
     {
-        if (UpKey())
+        if (UpKeyDown())
         {
             MoveUp();
         }
-        else if (DownKey())
+        else if (DownKeyDown())
         {
             MoveDown();
         }
