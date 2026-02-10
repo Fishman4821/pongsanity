@@ -24,6 +24,7 @@ public class ScoreController : MonoBehaviour
     {
         if (playerScore > opponentScore)
         {
+            Destroy(GameObject.Find("CharacterData"));
             if (twoPlayer)
             {
                 SceneManager.LoadScene("PlayerOneWin");
@@ -35,6 +36,7 @@ public class ScoreController : MonoBehaviour
         }
         else if (playerScore < opponentScore)
         {
+            Destroy(GameObject.Find("CharacterData"));
             if (twoPlayer)
             {
                 SceneManager.LoadScene("PlayerTwoWin");
