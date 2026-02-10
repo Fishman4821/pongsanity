@@ -86,7 +86,7 @@ public class Double : Base
         ClampYPosition();
 
         UpdateUlt();
-        if (ball.GetComponent<Ball>().doubleScore == false && UltActive)
+        if (ball.GetComponent<Ball>().scoreValue == 1 && UltActive)
         {
             ResetUlt();
         }
@@ -101,6 +101,6 @@ public class Double : Base
     {
         UltMeter = 0f;
         UltActive = true;
-        ball.GetComponent<Ball>().DoubleScore();
+        ball.GetComponent<Ball>().IncreaseScoreValue();
     }
 }

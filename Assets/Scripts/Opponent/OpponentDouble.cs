@@ -136,5 +136,9 @@ public class OpponentDouble : Double
 
         ClampYPosition();
         UpdateUlt();
+        if (ball.GetComponent<Ball>().scoreValue == 1 && UltActive)
+        {
+            ResetUlt();
+        }
     }
 }

@@ -8,7 +8,7 @@ public class Ball : MonoBehaviour
     public float impulse = 10f;
     public float drag = 0.005f;
     public float boost = 0.001f;
-    public bool doubleScore = false;
+    public int scoreValue = 1;
     public ScoreController score;
     private Rigidbody2D rb;
     private TrailRenderer tr;
@@ -45,7 +45,7 @@ public class Ball : MonoBehaviour
 
     void Reset()
     {
-        doubleScore = false;
+        scoreValue = 1;
         sr.color = Color.white;
         tr.emitting = false;
         rb.velocity = Vector2.zero;
@@ -140,12 +140,12 @@ public class Ball : MonoBehaviour
         {
             if (collision.gameObject.transform.position.x < 0)
             {
-                score.IncrementOpponentScore(doubleScore);
+                score.IncrementOpponentScore(scoreValue);
                 audioSource.PlayOneShot(scoreDing);
             }
             else
             {
-                score.IncrementPlayerScore(doubleScore);
+                score.IncrementPlayerScore(scoreValue);
                 audioSource.PlayOneShot(scoreDing);
             }
             Restart();
@@ -167,9 +167,9 @@ public class Ball : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, -rb.velocity.y);  
     }
 
-    public void DoubleScore()
+    public void IncreaseScoreValue()
     {
-        doubleScore = true;
+        scoreValue *= 2;
         sr.color = Color.green;
     }
 }

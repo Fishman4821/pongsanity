@@ -78,7 +78,9 @@ public abstract class Base : MonoBehaviour
 
     protected bool UpKey() { return Input.GetKey(upKey); }
     protected bool UpKeyUp() { return Input.GetKeyUp(upKey); }
+    protected bool UpKeyDown() { return Input.GetKeyDown(upKey); }
     protected bool DownKey() { return Input.GetKey(downKey); }
+    protected bool DownKeyDown() { return Input.GetKeyDown(downKey); }
     protected bool LeftKey() { return Input.GetKey(leftKey); }
     protected bool RightKey() { return Input.GetKey(rightKey); }
     protected bool UltKeyDown()
