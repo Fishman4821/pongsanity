@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PaddleType;
-using System;
 //using UnityEditor.SearchService;
 using UnityEngine.SceneManagement;
 
@@ -43,14 +42,32 @@ public class CharacterSelector : MonoBehaviour
         twoPlayer = twoPlayer_;
     }
 
+    public void LoadMusic(CharacterData characterData)
+    {
+        characterData.musicTracks = new List<AudioClip>();
+        for (int i = 1; i <= 3; i++)
+        {
+            characterData.musicTracks.Add(Resources.Load<AudioClip>($"Music/Song {i}"));
+        }
+    }
+
     public void Confirm()
     {
-        GameObject data = new GameObject("CharacterData");
-        CharacterData characterData = data.AddComponent<CharacterData>();
+        GameObject data = GameObject.Find("CharacterData");
+        if (data == null)
+        {
+            data = new GameObject("CharacterData");
+            DontDestroyOnLoad(data);
+        }
+        if (!data.TryGetComponent(out CharacterData characterData))
+        {
+            characterData = data.AddComponent<CharacterData>();
+            LoadMusic(characterData);
+        }
         characterData.playerCharacter = playerCharacter;
         characterData.opponentCharacter = opponentCharacter;
         characterData.twoPlayer = twoPlayer;
-        DontDestroyOnLoad(data);
+        characterData.musicTrack = Random.Range(0, characterData.musicTracks.Count);
         LoadNextInBuild();
     }
 }

@@ -1761,8 +1761,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0e0fd5afa52b0bc4f8a84dc386e87113, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
@@ -2315,7 +2315,6 @@ MonoBehaviour:
   opponentScoreText: {fileID: 931064526}
   timerText: {fileID: 495746172}
   countDownText: {fileID: 684182339}
-  audioSource: {fileID: 1239594952}
   started: 0
   overtime: 0
   timer: 180
@@ -2344,7 +2343,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 14162d5963f891344a7e02beb40b687a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

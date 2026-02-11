@@ -12,7 +12,9 @@ public class ScoreController : MonoBehaviour
     public TextMeshProUGUI opponentScoreText;
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI countDownText;
-    public AudioSource audioSource;
+    private AudioSource sfx;
+    private AudioSource music;
+    private CharacterData characterData;
     public bool started = false;
     public bool overtime = false;
     private bool twoPlayer = false;
@@ -24,7 +26,6 @@ public class ScoreController : MonoBehaviour
     {
         if (playerScore > opponentScore)
         {
-            Destroy(GameObject.Find("CharacterData"));
             if (twoPlayer)
             {
                 SceneManager.LoadScene("PlayerOneWin");
@@ -36,7 +37,6 @@ public class ScoreController : MonoBehaviour
         }
         else if (playerScore < opponentScore)
         {
-            Destroy(GameObject.Find("CharacterData"));
             if (twoPlayer)
             {
                 SceneManager.LoadScene("PlayerTwoWin");
@@ -55,12 +55,16 @@ public class ScoreController : MonoBehaviour
 
     void Start()
     {
-        twoPlayer = GameObject.Find("CharacterData").GetComponent<CharacterData>().twoPlayer;
-        audioSource = GetComponent<AudioSource>();
+        characterData = GameObject.Find("CharacterData").GetComponent<CharacterData>();
+        twoPlayer = characterData.twoPlayer;
+        sfx = GetComponent<AudioSource>();
+        music = GameObject.Find("Music").GetComponent<AudioSource>();
         ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>();
         playerScoreText.text = playerScore.ToString();
         opponentScoreText.text = opponentScore.ToString();
         timerText.text = (int)Mathf.Max(timer / 60f, 0) + ":" + ((int)(Mathf.Max(timer, 0) % 60f)).ToString("00");
+        music.clip = characterData.musicTracks[characterData.musicTrack];
+        music.Play();
     }
 
     void Update()
@@ -90,7 +94,7 @@ public class ScoreController : MonoBehaviour
             if (Mathf.Floor(countDown) > 0)
             {
                 countDownText.text = Mathf.Floor(countDown).ToString();
-                audioSource.Play();
+                sfx.Play();
             }
             else
             {
