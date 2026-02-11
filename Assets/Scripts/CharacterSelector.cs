@@ -45,7 +45,7 @@ public class CharacterSelector : MonoBehaviour
     public void LoadMusic(CharacterData characterData)
     {
         characterData.musicTracks = new List<AudioClip>();
-        for (int i = 1; i <= 3; i++)
+        for (int i = 1; i <= 5; i++)
         {
             characterData.musicTracks.Add(Resources.Load<AudioClip>($"Music/Song {i}"));
         }
