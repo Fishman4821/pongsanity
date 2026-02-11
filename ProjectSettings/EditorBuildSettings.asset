@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tiebreaker.unity
     guid: f46c10eaf1e3c22439e67d547141de05
+  - enabled: 1
+    path: Assets/Scenes/PaddlePass.unity
+    guid: 00352091ffd15cc49a59a6944277be2f
   m_configObjects: {}
