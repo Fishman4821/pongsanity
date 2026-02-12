@@ -10,11 +10,12 @@ public class Launcher : Base
     public float boundY = 2.625f;
     public float ultForceMult = 2.5f;
     public override float UltDuration { get; set; } = 5.0f;
+    public override float UltCharge { get; set; } = 0.125f;
     public bool holdingBall = false;
-    protected SpriteRenderer sr;
     protected BoxCollider2D bc;
     protected Rigidbody2D rb;
     protected GameObject[] parts;
+
 
     void InitShape()
     {
