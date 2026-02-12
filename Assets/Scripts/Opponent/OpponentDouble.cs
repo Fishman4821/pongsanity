@@ -17,7 +17,7 @@ public class OpponentDouble : Double
 
     protected override void InitOpponent()
     {
-        self = new Self(topObj, topRb, ball, speed, 0.5f);
+        self = new Self(topObj, topRb, ball, speed, 0.375f);
     }
 
     private float waitTime = 0f;
