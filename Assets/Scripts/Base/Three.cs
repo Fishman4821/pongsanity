@@ -37,11 +37,11 @@ public class Three : Base
 
     protected void UpdatePos()
     {
-        if (transform.position.y < pos * 2.0f - 0.05f)
+        if (transform.position.y < pos * 2.0f - 0.1f)
         {
             rb.velocity = new Vector2(0, speed * (UltActive ? ultSpeedMult : 1f));
         }
-        else if (transform.position.y > pos * 2.0f + 0.05f)
+        else if (transform.position.y > pos * 2.0f + 0.1f)
         {
             rb.velocity = new Vector2(0, -speed * (UltActive ? ultSpeedMult : 1f));
         }

@@ -68,10 +68,10 @@ public class UltMeter : MonoBehaviour
         else
         {
             player = obj.GetComponent<Base>();
-        }     
+        }
         meter = new GameObject("UltMeter");
         meter.transform.parent = transform;
-        SpriteRenderer sr = meter.AddComponent<SpriteRenderer>();   
+        SpriteRenderer sr = meter.AddComponent<SpriteRenderer>();
         sr.sprite = Resources.Load<Sprite>("Square");
         sr.color = CharacterToColor(character);
         sr.sortingLayerName = "Background";
@@ -90,11 +90,11 @@ public class UltMeter : MonoBehaviour
 
         if (player.UltActive)
         {
-            if (player.UltDuration == 0f) 
+            if (player.UltDuration == 0f)
             {
                 meter.transform.localPosition = new Vector3(-1f + 1, meter.transform.localPosition.z);
                 meter.transform.localScale = new Vector3(2.1f, height, 1f);
-            } 
+            }
             else
             {
                 meter.transform.localPosition = new Vector3(-1f + (player.UltDuration - player.UltTimer) / player.UltDuration, meter.transform.localPosition.y, meter.transform.localPosition.z);

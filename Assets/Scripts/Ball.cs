@@ -144,7 +144,7 @@ public class Ball : MonoBehaviour
             velocity.y = (rb.velocity.y / 2) + (collision.collider.attachedRigidbody.velocity.y / 3);
             rb.velocity = velocity;
             audioSource.PlayOneShot(bounceBonk);
-        } 
+        }
         else if (collision.gameObject.CompareTag("Bottom Double"))
         {
             Vector2 velocity;
@@ -199,7 +199,7 @@ public class Ball : MonoBehaviour
     public void PaddleUlt(float mult)
     {
         rb.velocity = impulse * mult * -rb.velocity.normalized;
-        rb.velocity = new Vector2(rb.velocity.x, -rb.velocity.y);  
+        rb.velocity = new Vector2(rb.velocity.x, -rb.velocity.y);
     }
 
     public void IncreaseScoreValue()
