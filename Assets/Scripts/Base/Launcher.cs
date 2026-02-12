@@ -85,14 +85,12 @@ public class Launcher : Base
 
     protected void ResetRotation()
     {
-        if (transform.rotation.eulerAngles.z > 0.1f || transform.rotation.eulerAngles.z < -0.1f) // 0.01
+        if (transform.rotation.eulerAngles.z > 0.1f || transform.rotation.eulerAngles.z < -0.1f)
         {
-            // rb.angularVelocity = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, 0, 1) - transform.rotation.eulerAngles.z < 0 ? -turnSpeed : turnSpeed;
             transform.rotation = Quaternion.Euler(0f, 0f, Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, 0, turnSpeed * Time.deltaTime));
         }
         else
         {
-            // rb.angularVelocity = 0;
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
@@ -128,7 +126,8 @@ public class Launcher : Base
             rb.angularVelocity = angVel;
             ball.transform.position = transform.position;
             launchTimer += Time.deltaTime;
-            if (launchTimer >= launchTimeLimit) {
+            if (launchTimer >= launchTimeLimit)
+            {
                 Launch();
                 launchTimer = 0f;
             }
@@ -169,8 +168,9 @@ public class Launcher : Base
             if (twoPlayer && Opponent)
             {
                 Launch(180f);
-            } else
-            {   
+            }
+            else
+            {
                 Launch();
             }
         }

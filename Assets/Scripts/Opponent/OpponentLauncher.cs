@@ -143,13 +143,11 @@ public class OpponentLauncher : Launcher
                 }
                 if (Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.z, targetAngle + 180f)) < 3f)
                 {
-                    //rb.angularVelocity = 0f;
                     transform.rotation = Quaternion.Euler(0f, 0f, targetAngle + 180f);
                     state = State.Launching;
                 }
                 else
                 {
-                    //rb.angularVelocity = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, targetAngle, 1) - transform.rotation.eulerAngles.z < 0 ? turnSpeed : -turnSpeed;
                     transform.rotation = Quaternion.Euler(0f, 0f, Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, targetAngle + 180f, turnSpeed * Time.deltaTime));
                 }
                 break;
@@ -191,7 +189,8 @@ public class OpponentLauncher : Launcher
         if (!holdingBall && state != State.Resetting)
         {
             ResetRotation();
-        } else
+        }
+        else
         {
             ball.transform.position = transform.position;
         }

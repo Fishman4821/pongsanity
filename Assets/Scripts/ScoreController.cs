@@ -48,7 +48,6 @@ public class ScoreController : MonoBehaviour
         }
         else
         {
-            // SceneManager.LoadScene("Tiebreaker");
             overtime = true;
         }
     }
@@ -104,7 +103,7 @@ public class ScoreController : MonoBehaviour
             {
                 countDownText.gameObject.SetActive(false);
                 ball.FirstServe();
-            } 
+            }
             else if (countDown <= 3f && !ball.arrowSet)
             {
                 ball.SetArrow();

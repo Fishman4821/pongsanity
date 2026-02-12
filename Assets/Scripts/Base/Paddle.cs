@@ -65,7 +65,7 @@ public class Paddle : Base
             if (pos.x > 5f)
             {
                 pos.x = 5f;
-            } 
+            }
             else if (pos.x < 1f)
             {
                 pos.x = 1f;
@@ -76,7 +76,7 @@ public class Paddle : Base
             if (pos.x < -5f)
             {
                 pos.x = -5f;
-            } 
+            }
             else if (pos.x > -1f)
             {
                 pos.x = -1f;

@@ -37,7 +37,7 @@ public class OpponentPaddle : Paddle
     void Update()
     {
         predictedY = self.BallPredictedY(3.875f, float.NaN);
-        
+
         switch (state)
         {
             case State.Idle:

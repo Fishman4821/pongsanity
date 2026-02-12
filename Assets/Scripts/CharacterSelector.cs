@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PaddleType;
-//using UnityEditor.SearchService;
 using UnityEngine.SceneManagement;
 
 using static NextScene;

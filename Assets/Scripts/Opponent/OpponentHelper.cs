@@ -145,7 +145,6 @@ namespace OpponentHelper
                     vy *= -1;
                 }
 
-                // Debug.DrawLine(new Vector3(prevX, prevY, -2), new Vector3(x, y, -2), Color.red, 0f, false);
                 if (prevX - targetX <= 0 && x - targetX >= 0)
                 {
                     return y;

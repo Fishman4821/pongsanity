@@ -39,8 +39,6 @@ public class OpponentDouble : Double
     {
         float predictedY = self.BallPredictedY(3.9375f, float.NaN);
 
-        // Debug.DrawLine(new Vector3(3.875f, !float.IsNaN(predictedY) ? predictedY : -10, -2), new Vector3(4.875f, !float.IsNaN(predictedY) ? predictedY : -10, -2), Color.yellow, 0.5f, false);
-
         switch (state)
         {
             case State.Idle:
@@ -110,13 +108,6 @@ public class OpponentDouble : Double
                 break;
         }
 
-        
-        // Debug.DrawLine(new Vector3(self.X, self.Y + self.paddleHeight / 2f, -2), new Vector3(self.X + 1f, self.Y + self.paddleHeight / 2f, -2), Color.green, 0f, false);
-        // Debug.DrawLine(new Vector3(self.X, self.Y - self.paddleHeight / 2f, -2), new Vector3(self.X + 1f, self.Y - self.paddleHeight / 2f, -2), Color.blue, 0f, false);
-        // Debug.DrawLine(new Vector3(self.X, -self.Y + self.paddleHeight / 2f, -2), new Vector3(self.X + 1f, -self.Y + self.paddleHeight / 2f, -2), Color.magenta, 0f, false);
-        // Debug.DrawLine(new Vector3(self.X, -self.Y - self.paddleHeight / 2f, -2), new Vector3(self.X + 1f, -self.Y - self.paddleHeight / 2f, -2), Color.red, 0f, false);
-
-        // Debug.DrawLine(new Vector3(4f, predictedY < -0.3f ? -self.Y : self.Y, -2), new Vector3(3f, predictedY < -0.3f ? -self.Y + topRb.velocity.y / 14.0f : self.Y + topRb.velocity.y / 74.0f, -2), Color.cyan, 0, false);
         if (UltReady() && self.ballX < -3f)
         {
             if (ultWaitTime == 0f)
@@ -131,8 +122,6 @@ public class OpponentDouble : Double
                 Ult();
             }
         }
-
-        // Debug.Log("Predicted Y: " + predictedY.ToString("F2") + " Paddle Y: " + self.Y.ToString("F2") + " Vel Y: " + self.rb.velocity.y.ToString("F2") + " Ball Vel X: " + self.ballX.ToString("F2"));
 
         ClampYPosition();
         UpdateUlt();

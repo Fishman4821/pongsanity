@@ -11,7 +11,7 @@ public class Double : Base
     protected GameObject topObj;
     protected SpriteRenderer topSr;
     protected Rigidbody2D topRb;
-    
+
     protected GameObject bottomObj;
     protected SpriteRenderer bottomSr;
 

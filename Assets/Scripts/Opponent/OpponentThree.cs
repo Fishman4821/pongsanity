@@ -42,7 +42,8 @@ public class OpponentThree : Three
             {
                 if (!reacting)
                 {
-                    if (waitTime == 0f) {
+                    if (waitTime == 0f)
+                    {
                         waitTime = reactionTime + Random.Range(-reactionVariance, reactionVariance);
                     }
                     timeWaited += Time.deltaTime;
@@ -51,7 +52,8 @@ public class OpponentThree : Three
                         waitTime = 0f;
                         timeWaited = 0f;
                         reacting = true;
-                    } else
+                    }
+                    else
                     {
                         break;
                     }
@@ -67,7 +69,7 @@ public class OpponentThree : Three
                 else if (predictedY < self.Y - self.paddleHeight / 2f && reacting)
                 {
                     MoveDown();
-                } 
+                }
                 else
                 {
                     reacting = false;
