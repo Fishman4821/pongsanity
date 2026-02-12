@@ -15,7 +15,8 @@ public class Launcher : Base
     protected BoxCollider2D bc;
     protected Rigidbody2D rb;
     protected GameObject[] parts;
-
+    private float launchTimer = 0f;
+    public float launchTimeLimit = 5f;
 
     void InitShape()
     {
@@ -126,6 +127,11 @@ public class Launcher : Base
             }
             rb.angularVelocity = angVel;
             ball.transform.position = transform.position;
+            launchTimer += Time.deltaTime;
+            if (launchTimer >= launchTimeLimit) {
+                Launch();
+                launchTimer = 0f;
+            }
         }
         else
         {
