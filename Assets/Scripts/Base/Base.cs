@@ -13,6 +13,7 @@ public abstract class Base : MonoBehaviour
     public virtual float UltDuration { get; set; }
     public float UltTimer = 0f;
     public bool UltActive = false;
+    public virtual float UltCharge { get; set;} = 0.25f;
     public abstract void Ult();
     public abstract void ResetUlt();
 
@@ -45,7 +46,7 @@ public abstract class Base : MonoBehaviour
 
     public void IncrementUltMeter()
     {
-        if (!UltActive) UltMeter = Mathf.Clamp(UltMeter + 0.25f, 0f, UltMeterMax);
+        if (!UltActive) UltMeter = Mathf.Clamp(UltMeter + UltCharge, 0f, UltMeterMax);
     }
 
     public bool UltReady()

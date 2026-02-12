@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Double : Base
 {
-    public float speed = 6f;
-    public float boundY = 2.5f;
+    public float speed = 5f;
+    public float boundY = 2.75f;
     public override float UltDuration { get; set; } = 0f;
     protected GameObject topObj;
     protected SpriteRenderer topSr;
@@ -21,8 +21,8 @@ public class Double : Base
         bottomObj = new GameObject("BottomPaddle");
         topObj.transform.parent = transform;
         bottomObj.transform.parent = transform;
-        topObj.transform.localScale = new Vector3(0.25f, 1, 1);
-        bottomObj.transform.localScale = new Vector3(0.25f, 1, 1);
+        topObj.transform.localScale = new Vector3(0.125f, 0.5f, 1);
+        bottomObj.transform.localScale = new Vector3(0.125f, 0.5f, 1);
         if (Opponent)
         {
             topObj.transform.position = new Vector3(4f, 1.5f, 0);
@@ -58,9 +58,9 @@ public class Double : Base
         {
             pos.y = boundY;
         }
-        else if (pos.y < 0.5f)
+        else if (pos.y < 0.25f)
         {
-            pos.y = 0.5f;
+            pos.y = 0.25f;
         }
         topObj.transform.position = pos;
         bottomObj.transform.position = new Vector3(bottomObj.transform.position.x, -pos.y, bottomObj.transform.position.z);

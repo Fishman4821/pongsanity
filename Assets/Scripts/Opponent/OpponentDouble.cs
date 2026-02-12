@@ -17,7 +17,7 @@ public class OpponentDouble : Double
 
     protected override void InitOpponent()
     {
-        self = new Self(topObj, topRb, ball, speed, 1f);
+        self = new Self(topObj, topRb, ball, speed, 0.5f);
     }
 
     private float waitTime = 0f;
@@ -37,7 +37,7 @@ public class OpponentDouble : Double
 
     void Update()
     {
-        float predictedY = self.BallPredictedY(3.875f, float.NaN);
+        float predictedY = self.BallPredictedY(3.9375f, float.NaN);
 
         // Debug.DrawLine(new Vector3(3.875f, !float.IsNaN(predictedY) ? predictedY : -10, -2), new Vector3(4.875f, !float.IsNaN(predictedY) ? predictedY : -10, -2), Color.yellow, 0.5f, false);
 
@@ -63,7 +63,7 @@ public class OpponentDouble : Double
                 }
                 break;
             case State.Moving:
-                if (predictedY > -0.3f)
+                if (predictedY > -0.15f)
                 {
                     if (predictedY > self.Y + self.paddleHeight / 2f)
                     {

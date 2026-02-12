@@ -11,6 +11,7 @@ public class Paddle : Base
     public override float UltDuration { get; set; } = 0.1f;
     protected SpriteRenderer sr;
     protected Rigidbody2D rb;
+    public override float UltCharge { get; set; } = 0.167f;
 
     protected override void Init()
     {
