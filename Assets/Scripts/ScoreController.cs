@@ -104,6 +104,10 @@ public class ScoreController : MonoBehaviour
             {
                 countDownText.gameObject.SetActive(false);
                 ball.FirstServe();
+            } 
+            else if (countDown <= 3f && !ball.arrowSet)
+            {
+                ball.SetArrow();
             }
         }
     }

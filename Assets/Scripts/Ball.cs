@@ -17,30 +17,65 @@ public class Ball : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip bounceBonk;
     public AudioClip scoreDing;
+    private GameObject arrow;
+    private float arrowAngle;
+    public bool arrowSet;
+
     IEnumerator Serve()
     {
+        SetArrow();
         yield return new WaitForSeconds(2f);
-        float angle = UnityEngine.Random.Range(-45, 45);
-        if (serveDirection)
-        {
-            angle += 180;
-        }
-        Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+        Vector2 direction = new Vector2(Mathf.Cos(arrowAngle * Mathf.Deg2Rad), Mathf.Sin(arrowAngle * Mathf.Deg2Rad));
         rb.velocity = direction.normalized * impulse;
         serveDirection = !serveDirection;
+        RemoveArrow();
+    }
+
+    public void MakeArrow()
+    {
+        arrow = new GameObject("Arrow");
+        arrow.transform.position = transform.position;
+        GameObject tip = new GameObject("Tip");
+        tip.transform.parent = arrow.transform;
+        tip.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Triangle");
+        tip.transform.localScale = new Vector3(0.1f, 0.1f, 1);
+        tip.transform.localPosition = new Vector3(0, 0.625f, 1);
+        GameObject shaft = new GameObject("Shaft");
+        shaft.transform.parent = arrow.transform;
+        shaft.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Square");
+        shaft.transform.localScale = new Vector3(0.04f, 0.25f, 1);
+        shaft.transform.localPosition = new Vector3(0, 0.5f, 1);
+    }
+
+    public void SetArrow()
+    {
+        if (arrow == null)
+        {
+            MakeArrow();
+        }
+        arrowAngle = UnityEngine.Random.Range(-45, 45);
+        if (serveDirection)
+        {
+            arrowAngle += 180;
+        }
+        arrow.transform.rotation = Quaternion.Euler(0, 0, arrowAngle - 90f);
+        arrow.SetActive(true);
+        arrowSet = true;
+    }
+
+    public void RemoveArrow()
+    {
+        arrow.SetActive(false);
+        arrowSet = false;
     }
 
     public void FirstServe()
     {
-        float angle = UnityEngine.Random.Range(-45, 45);
-        if (serveDirection)
-        {
-            angle += 180;
-        }
-        Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+        Vector2 direction = new Vector2(Mathf.Cos(arrowAngle * Mathf.Deg2Rad), Mathf.Sin(arrowAngle * Mathf.Deg2Rad));
         rb.velocity = direction.normalized * impulse;
         serveDirection = !serveDirection;
         score.started = true;
+        RemoveArrow();
     }
 
     void Reset()
