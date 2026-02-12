@@ -7,7 +7,7 @@ public class Paddle : Base
 {
     public float speed = 7.5f;
     public float boundY = 2.5f;
-    public float ultForceMult = 2f;
+    public float ultForceMult = 1.75f;
     public override float UltDuration { get; set; } = 0.1f;
     protected SpriteRenderer sr;
     protected Rigidbody2D rb;
